@@ -18,6 +18,8 @@ def prompt(questions, answers=None, **kwargs):
     true_color = kwargs.pop('true_color', False)
     refresh_interval = kwargs.pop('refresh_interval', 0)
     eventloop = kwargs.pop('eventloop', None)
+    kbi_msg = kwargs.pop('keyboard_interrupt_msg', 'Cancelled by user')
+
 
     for question in questions:
         # import the question
@@ -82,7 +84,7 @@ def prompt(questions, answers=None, **kwargs):
             raise ValueError('No question type \'%s\'' % type)
         except KeyboardInterrupt:
             print('')
-            print('Cancelled by user')
+            print(kbi_msg)
             print('')
             return {}
     return answers

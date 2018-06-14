@@ -127,11 +127,12 @@ def question(message, **kwargs):
     style = kwargs.pop('style', default_style)
 
     ic = InquirerControl(choices)
+    qmark = kwargs.pop('qmark', '?')
 
     def get_prompt_tokens(cli):
         tokens = []
 
-        tokens.append((Token.QuestionMark, '?'))
+        tokens.append((Token.QuestionMark, qmark))
         tokens.append((Token.Question, ' %s ' % message))
         if ic.answered:
             nbr_selected = len(ic.selected_options)

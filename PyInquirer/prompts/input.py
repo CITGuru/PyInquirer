@@ -33,10 +33,12 @@ def question(message, **kwargs):
 
     # TODO style defaults on detail level
     kwargs['style'] = kwargs.pop('style', default_style)
+    qmark = kwargs.pop('qmark', '?')
+
 
     def _get_prompt_tokens(cli):
         return [
-            (Token.QuestionMark, '?'),
+            (Token.QuestionMark, qmark),
             (Token.Question, ' %s  ' % message)
         ]
 

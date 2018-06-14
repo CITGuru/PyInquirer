@@ -110,7 +110,7 @@ def question(message, **kwargs):
 
     choices = kwargs.pop('choices', None)
     default = kwargs.pop('default', 0)  # TODO
-
+    qmark = kwargs.pop('qmark', '?')
     # TODO style defaults on detail level
     style = kwargs.pop('style', default_style)
 
@@ -119,7 +119,7 @@ def question(message, **kwargs):
     def get_prompt_tokens(cli):
         tokens = []
 
-        tokens.append((Token.QuestionMark, '?'))
+        tokens.append((Token.QuestionMark, qmark))
         tokens.append((Token.Question, ' %s ' % message))
         if ic.answered:
             tokens.append((Token.Answer, ' ' + ic.get_selection()[0]))

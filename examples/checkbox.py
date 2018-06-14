@@ -23,9 +23,10 @@ style = style_from_dict({
 questions = [
     {
         'type': 'checkbox',
+        'qmark': '[?]',
         'message': 'Select toppings',
         'name': 'toppings',
-        'choices': [
+        'choices': [ 
             Separator('= The Meats ='),
             {
                 'name': 'Ham'

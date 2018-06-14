@@ -1,6 +1,6 @@
-# PythonInquirer?
+# PythonInquirer
 
-A collection of common interactive command line user interfaces. It is originally called whaaaaaat created by, but due to the author not active, outdated, bad naming and in need of fixes, I decided to rename and apply some fixes on it. I'll also carry out the author's TODO.
+A collection of common interactive command line user interfaces. It is originally called [whaaaaaat](https://github.com/finklabs/whaaaaat) created by **finklabs**, but due to bad naming and in need of fixes, I decided to rename and apply some necessary fixes on it. I'll also carry out the author's TODO.
 
 ## Table of Contents
 
@@ -13,7 +13,7 @@ A collection of common interactive command line user interfaces. It is originall
     6. [User Interfaces and Styles](#styles)
   2. [Windows Platform](#windows)
   3. [Support](#support)
-  4. [Contributing](#contributing)
+  4. [Contribution](#contribution)
   5. [Acknowledgments](#acknowledgements)
   6. [License](#license)
 
@@ -31,8 +31,6 @@ A collection of common interactive command line user interfaces. It is originall
 
 **Note:** **`PyInquirer`** provides the user interface and the inquiry session flow.
 > 
-If you're searching for a scaffolding utility, then check out [banana](https://github.com/finklabs/banana), the whaaaaat sister utility.
-
 
 ## Documentation
 <a name="documentation"></a>
@@ -104,7 +102,7 @@ Take `type`, `name`, `message`, `choices`[, `default`, `filter`] properties. (No
 default must be the choice `index` in the array or a choice `value`)
 
 ![List prompt](https://raw.githubusercontent.com/citguru/PyInquirer/develop/docs/images/input-prompt.png)
-
+s
 ---
 
 #### Raw List - `{type: 'rawlist'}`
@@ -214,26 +212,15 @@ Issue on Github TODO link
 
 For many issues like for example common Python programming issues stackoverflow might be a good place to search for an answer.  TODO link
 
-Visit the citguru slack channel for announcements and news. TODO link
+<a name="contribution"></a>
+## Contribution
 
-
-## Contributing
-<a name="contributing"></a>
-
-Unit test Unit test are written using pytest. Please add a unit test for every new feature or bug fix.
-
-Documentation Add documentation for every API change. Feel free to send typo fixes and better docs!
-
-We're looking to offer good support for multiple prompts and environments. If you want to help, we'd like to keep a list of testers for each terminal/OS so we can contact you and get feedback before release. Let us know if you want to be added to the list.
-
-
-## Acknowledgments
-<a name="acknowledgements"></a>
-
-Many thanks to our friends at Inquirer.js. We think they did a great job developing the tooling to support the nodejs technology.
-
+Yes, you can contribute to this.
 
 ## License
 <a name="license"></a>
 
-Copyright (c) 2016-2017 Mark Fink (twitter: @markfink) Licensed under the MIT license.
+Copyright (c) 2016-2017 
+Mark Fink (twitter: @markfink)
+Oyetoke Toby ((twitter: @oyetokeT))
+Licensed under the MIT license.

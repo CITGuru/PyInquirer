@@ -120,7 +120,7 @@ def question(message, **kwargs):
 
     choices = kwargs.pop('choices', None)
     default = kwargs.pop('default', None)
-
+    qmark = kwargs.pop('qmark', '?')
     # TODO style defaults on detail level
     style = kwargs.pop('style', default_style)
 
@@ -130,7 +130,7 @@ def question(message, **kwargs):
         tokens = []
         T = Token
 
-        tokens.append((T.QuestionMark, '?'))
+        tokens.append((T.QuestionMark, qmark))
         tokens.append((T.Question, ' %s ' % message))
         if not ic.answered:
             tokens.append((T.Instruction, ' (%s)' % ''.join(
