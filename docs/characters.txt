@@ -1,0 +1,16 @@
+# useful unicode characters
+
+lookup characters : http://www.babelstone.co.uk/Unicode/whatisit.html?
+table : http://unicode-table.com/en/25CE/
+
+◯ U+25EF : LARGE CIRCLE
+
+◉ U+25C9 : FISHEYE {tainome (Japanese, a kind of bullet)}
+○ U+25CB : better -> White Circle U+25CB
+● U+25CF : Black Circle U+25CF
+◎ U+25CE : Bullseye 
+
+☐  U+2610
+☑  U+2611 : Ballot with check mark
+
+❯ U+276F : HEAVY RIGHT-POINTING ANGLE QUOTATION MARK ORNAMENT

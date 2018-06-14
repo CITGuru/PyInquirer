@@ -1,0 +1,12 @@
+
+
+
+
+# structure
+
+this implementation follows the structure of the original Inquirer.js implementation where it makes sense. In this way we try to stay compatible and make it easy to port over new features. We still try to keep this code base pythonic. For example if something is called "input" in the original implementation we call it "input" in the python version as well.
+
+
+
+
+

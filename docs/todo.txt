@@ -1,0 +1,11 @@
+# TODO
+* defaults (all except checkbox)
+* migrate tests from Inquirer.js
+* better docs
+* readthedocs
+* landing page
+* CI
+* checkbox validate
+* editor prompt
+* samples for all prompts
+* bottom-bar
