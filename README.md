@@ -220,7 +220,6 @@ Yes, you can contribute to this.
 ## License
 <a name="license"></a>
 
-Copyright (c) 2016-2017 
-Mark Fink (twitter: @markfink)
-Oyetoke Toby ((twitter: @oyetokeT))
+Copyright (c) 2018
+Oyetoke Toby (twitter: @oyetokeT)
 Licensed under the MIT license.
