@@ -1,6 +1,6 @@
 # PythonInquirer?
 
-A collection of common interactive command line user interfaces. It is originally called whaaaaaat created by, but due to the author not active, outdated, bad naming and in need of fixes, I decided to rename and apply some fixes on it. I also plan to carry out the author's TODO
+A collection of common interactive command line user interfaces. It is originally called whaaaaaat created by, but due to the author not active, outdated, bad naming and in need of fixes, I decided to rename and apply some fixes on it. I'll also carry out the author's TODO.
 
 ## Table of Contents
 
@@ -31,7 +31,7 @@ A collection of common interactive command line user interfaces. It is originall
 
 **Note:** **`PyInquirer`** provides the user interface and the inquiry session flow.
 > 
-If you're searching for a scaffolding utility, then check out [banana](https://github.com/finklabs/banana), the PyInquirer's sister utility.
+If you're searching for a scaffolding utility, then check out [banana](https://github.com/finklabs/banana), the whaaaaat sister utility.
 
 
 ## Documentation
@@ -103,7 +103,7 @@ Most of the examples intend to demonstrate a single question type or feature:
 Take `type`, `name`, `message`, `choices`[, `default`, `filter`] properties. (Note that
 default must be the choice `index` in the array or a choice `value`)
 
-![List prompt](https://raw.githubusercontent.com/finklabs/PyInquirer/develop/docs/images/input-prompt.png)
+![List prompt](https://raw.githubusercontent.com/citguru/PyInquirer/develop/docs/images/input-prompt.png)
 
 ---
 
@@ -112,7 +112,7 @@ default must be the choice `index` in the array or a choice `value`)
 Take `type`, `name`, `message`, `choices`[, `default`, `filter`] properties. (Note that
 default must the choice `index` in the array)
 
-![Raw list prompt](https://raw.githubusercontent.com/finklabs/PyInquirer/develop/docs/images/raw-list.png)
+![Raw list prompt](https://raw.githubusercontent.com/citguru/PyInquirer/develop/docs/images/raw-list.png)
 
 ---
 
@@ -125,8 +125,8 @@ Note that the `choices` object will take an extra parameter called `key` for the
 
 See `examples/expand.py` for a running example.
 
-![Expand prompt closed](https://raw.githubusercontent.com/finklabs/PyInquirer/develop/docs/images/expand-prompt-1.png)
-![Expand prompt expanded](https://raw.githubusercontent.com/finklabs/PyInquirer/develop/docs/images/expand-prompt-2.png)
+![Expand prompt closed](https://raw.githubusercontent.com/citguru/PyInquirer/develop/docs/images/expand-prompt-1.png)
+![Expand prompt expanded](https://raw.githubusercontent.com/citguru/PyInquirer/develop/docs/images/expand-prompt-2.png)
 
 ---
 
@@ -138,7 +138,7 @@ Choices marked as `{checked: true}` will be checked by default.
 
 Choices whose property `disabled` is truthy will be unselectable. If `disabled` is a string, then the string will be outputted next to the disabled choice, otherwise it'll default to `"Disabled"`. The `disabled` property can also be a synchronous function receiving the current answers as argument and returning a boolean or a string.
 
-![Checkbox prompt](https://raw.githubusercontent.com/finklabs/PyInquirer/develop/docs/images/checkbox-prompt.png)
+![Checkbox prompt](https://raw.githubusercontent.com/citguru/PyInquirer/develop/docs/images/checkbox-prompt.png)
 
 ---
 
@@ -146,7 +146,7 @@ Choices whose property `disabled` is truthy will be unselectable. If `disabled` 
 
 Take `type`, `name`, `message`[, `default`] properties. `default` is expected to be a boolean if used.
 
-![Confirm prompt](https://raw.githubusercontent.com/finklabs/PyInquirer/develop/docs/images/confirm-prompt.png)
+![Confirm prompt](https://raw.githubusercontent.com/citguru/PyInquirer/develop/docs/images/confirm-prompt.png)
 
 ---
 
@@ -154,7 +154,7 @@ Take `type`, `name`, `message`[, `default`] properties. `default` is expected to
 
 Take `type`, `name`, `message`[, `default`, `filter`, `validate`] properties.
 
-![Input prompt](https://raw.githubusercontent.com/finklabs/PyInquirer/develop/docs/images/input-prompt.png)
+![Input prompt](https://raw.githubusercontent.com/citguru/PyInquirer/develop/docs/images/input-prompt.png)
 
 ---
 
@@ -162,7 +162,7 @@ Take `type`, `name`, `message`[, `default`, `filter`, `validate`] properties.
 
 Take `type`, `name`, `message`[, `default`, `filter`, `validate`] properties.
 
-![Password prompt](https://raw.githubusercontent.com/finklabs/PyInquirer/develop/docs/images/password-prompt.png)
+![Password prompt](https://raw.githubusercontent.com/citguru/PyInquirer/develop/docs/images/password-prompt.png)
 
 ---
 
@@ -214,7 +214,7 @@ Issue on Github TODO link
 
 For many issues like for example common Python programming issues stackoverflow might be a good place to search for an answer.  TODO link
 
-Visit the finklabs slack channel for announcements and news. TODO link
+Visit the citguru slack channel for announcements and news. TODO link
 
 
 ## Contributing

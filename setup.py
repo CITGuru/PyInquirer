@@ -25,12 +25,12 @@ setup(
     name='PyInquirer',
     version='0.5.3',
     description=(
-          'Collection of common interactive command line user interfaces,'
+          'A Python module for collection of common interactive command line user interfaces,'
           ' based on Inquirer.js'
     ),
     long_description=long_description,
     license='MIT',
-    url='https://github.com/finklabs/PyInquirer/',
+    url='https://github.com/CITGuru/PyInquirer/',
     classifiers=[
         'Development Status :: 1 - Planning',
         'Natural Language :: English',
@@ -47,8 +47,8 @@ setup(
     keywords='',
     packages=find_packages(exclude=['docs', 'tests*']),
     include_package_data=True,
-    author='',
+    author='Oyetoke Toby',
     install_requires=install_requires,
     dependency_links=dependency_links,
-    author_email=''
+    author_email='oyetoketoby80@gmail.com'
 )
