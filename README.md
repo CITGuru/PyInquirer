@@ -1,6 +1,6 @@
 # PythonInquirer
 
-A collection of common interactive command line user interfaces. It is originally called [whaaaaaat](https://github.com/finklabs/whaaaaat) created by **finklabs**, but due to bad naming and in need of fixes, I decided to rename and apply some necessary fixes on it. I'll also carry out the author's TODO.
+A collection of common interactive command line user interfaces. It is originally called [whaaaaaat](https://github.com/finklabs/whaaaaat) created by **finklabs**, but due to bad naming and in need of fixes, I decided to rename and apply some necessary fixes on it. The reason is because I needed it for a tool that can be install through PyPI. I need to rewrite it for my own need. But don't worry any new fix on the main Repo, will be added to it if needed. Lastly, I am currently working on the author's TODO.
 
 ## Table of Contents
 
@@ -220,6 +220,10 @@ Yes, you can contribute to this.
 ## License
 <a name="license"></a>
 
-Copyright (c) 2018
-Oyetoke Toby (twitter: @oyetokeT)
+Since I am not the owner, it all goes to Finklab
+
+Copyright (c) 2016-2017 Mark Fink (twitter: @markfink)
+
+Copyright (c) 2018 Oyetoke Toby (twitter: @oyetokeT)
+
 Licensed under the MIT license.
