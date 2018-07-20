@@ -5,12 +5,9 @@ from os import path
 here = path.abspath(path.dirname(__file__))
 
 # long description from the README file
-try:
-    import pypandoc
-    long_description = pypandoc.convert('README.md', format='md', to='rst')
-except(IOError, ImportError):
-    with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-        long_description = f.read()
+
+with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+    long_description = f.read()
 
 # get the dependencies
 with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f:
