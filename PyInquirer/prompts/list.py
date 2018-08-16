@@ -129,14 +129,11 @@ def question(message, **kwargs):
 
     # assemble layout
     layout = HSplit([
-        Window(content=TokenListControl(get_prompt_tokens, align_center=False)),
+        Window(height=D.exact(1),
+               content=TokenListControl(get_prompt_tokens)
+        ),
         ConditionalContainer(
-            Window(
-                ic,
-                width=D.exact(43),
-                height=D(min=3),
-                scroll_offsets=ScrollOffsets(top=1, bottom=1)
-            ),
+            Window(ic),
             filter=~IsDone()
         )
     ])
