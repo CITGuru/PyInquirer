@@ -305,9 +305,27 @@ Issue on Github TODO link
 For many issues like for example common Python programming issues
 stackoverflow might be a good place to search for an answer. TODO link
 
- ## Contribution
+Contribution
+------------
 
-Yes, you can contribute to this.
+.. code:: shell
+
+    $ git clone git@github.com:bmwant/PyInquirer.git
+    $ cd PyInquirer
+    $ python -m venv venv
+    $ source venv/bin/activate
+    $ pip install --upgrade pip
+    $ pip install -r requirements.txt
+    $ pip install -r requirements_dev.txt
+
+With an environment ready you can add new feature and check everything works
+just fine
+
+.. code:: shell
+
+    $ pytest -sv tests/
+
+That's it, now you can fork a project and submit PR with your change!
 
 License
 -------
