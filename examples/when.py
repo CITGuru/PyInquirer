@@ -4,15 +4,9 @@ When example
 """
 from __future__ import print_function, unicode_literals
 
-from PyInquirer import style_from_dict, Token, prompt, print_json, default_style
+from PyInquirer import style_from_dict, Token, prompt, print_json
 
-style = style_from_dict({
-    Token.QuestionMark: '#FF9D00 bold',
-    Token.Selected: '#5F819D bold',
-    Token.Instruction: '',  # default
-    Token.Answer: '#5F819D bold',
-    Token.Question: '',
-})
+from examples import custom_style_2
 
 
 def dislikes_bacon(answers):
@@ -47,6 +41,6 @@ questions = [
     }
 ]
 
-answers = prompt(questions, style=default_style)
+answers = prompt(questions, style=custom_style_2)
 
 print_json(answers)

@@ -6,16 +6,7 @@ from __future__ import print_function, unicode_literals
 
 from PyInquirer import style_from_dict, Token, prompt
 
-
-style = style_from_dict({
-    Token.Separator: '#6C6C6C',
-    Token.QuestionMark: '#FF9D00 bold',
-    Token.Selected: '',  # default
-    Token.Pointer: '#FF9D00 bold',
-    Token.Instruction: '',  # default
-    Token.Answer: '#5F819D bold',
-    Token.Question: '',
-})
+from examples import custom_style_2
 
 
 def ask_direction():
@@ -64,7 +55,7 @@ def encounter1():
 
 def encounter2a():
     direction = ask_direction()
-    if (direction == 'Forward'):
+    if direction == 'Forward':
         output = 'You find a painted wooden sign that says:'
         output += ' \n'
         output += ' ____  _____  ____  _____ \n'
@@ -88,7 +79,7 @@ def encounter2b():
             'Try and make a run for it',
             'Attack the wolf unarmed'
         ]
-    }, style=style)
+    }, style=custom_style_2)
     print('The wolf mauls you. You die. The end.')
 
 
