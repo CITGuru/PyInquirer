@@ -12,7 +12,6 @@ def prompt(questions, answers=None, **kwargs):
     if isinstance(questions, dict):
         questions = [questions]
     answers = answers or {}
-
     patch_stdout = kwargs.pop('patch_stdout', False)
     return_asyncio_coroutine = kwargs.pop('return_asyncio_coroutine', False)
     true_color = kwargs.pop('true_color', False)
@@ -20,16 +19,19 @@ def prompt(questions, answers=None, **kwargs):
     eventloop = kwargs.pop('eventloop', None)
     kbi_msg = kwargs.pop('keyboard_interrupt_msg', 'Cancelled by user')
 
-
     for question in questions:
         # import the question
-        if not 'type' in question:
+        if 'type' not in question:
             raise PromptParameterException('type')
-        if not 'name' in question:
+        if 'name' not in question:
             raise PromptParameterException('name')
-        if not 'message' in question:
+        if 'message' not in question:
             raise PromptParameterException('message')
         try:
+            choices = question.get('choices')
+            if choices is not None and callable(choices):
+                question['choices'] = choices(answers)
+
             _kwargs = {}
             _kwargs.update(kwargs)
             _kwargs.update(question)
@@ -38,6 +40,7 @@ def prompt(questions, answers=None, **kwargs):
             message = _kwargs.pop('message')
             when = _kwargs.pop('when', None)
             filter = _kwargs.pop('filter', None)
+
             if when:
                 # at least a little sanity check!
                 if callable(question['when']):
