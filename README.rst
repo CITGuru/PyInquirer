@@ -243,35 +243,35 @@ Question Properties
 
 A question is a dictionary containing question related values:
 
--  type: (String) Type of the prompt. Defaults: input - Possible values:
+-  ``type``: (String) Type of the prompt. Defaults: input - Possible values:
    input, confirm, list, rawlist, expand, checkbox, password, editor
--  name: (String) The name to use when storing the answer in the answers
+-  ``name``: (String) The name to use when storing the answer in the answers
    hash. If the name contains periods, it will define a path in the
    answers hash.
--  message: (String\|Function) The question to print. If defined as a
+-  ``message``: (String\|Function) The question to print. If defined as a
    function, the first parameter will be the current inquirer session
    answers.
--  default: (String\|Number\|Array\|Function) Default value(s) to use if
+-  ``default``: (String\|Number\|Array\|Function) Default value(s) to use if
    nothing is entered, or a function that returns the default value(s).
    If defined as a function, the first parameter will be the current
    inquirer session answers.
--  choices: (Array\|Function) Choices array or a function returning a
+-  ``choices``: (Array\|Function) Choices array or a function returning a
    choices array. If defined as a function, the first parameter will be
    the current inquirer session answers. Array values can be simple
    strings, or objects containing a name (to display in list), a value
    (to save in the answers hash) and a short (to display after
    selection) properties. The choices array can also contain a
    Separator.
--  validate: (Function) Receive the user input and should return true if
+-  ``validate``: (Function) Receive the user input and should return true if
    the value is valid, and an error message (String) otherwise. If false
    is returned, a default error message is provided.
--  filter: (Function) Receive the user input and return the filtered
+-  ``filter``: (Function) Receive the user input and return the filtered
    value to be used inside the program. The value returned will be added
    to the Answers hash.
--  when: (Function, Boolean) Receive the current user answers hash and
+-  ``when``: (Function, Boolean) Receive the current user answers hash and
    should return true or false depending on whether or not this question
    should be asked. The value can also be a simple boolean.
--  pageSize: (Number) Change the number of lines that will be rendered
+-  ``pageSize``: (Number) Change the number of lines that will be rendered
    when using list, rawList, expand or checkbox.
 
 User Interfaces and Styles
