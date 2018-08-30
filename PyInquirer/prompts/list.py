@@ -40,7 +40,6 @@ class InquirerControl(TokenListControl):
         self.selected_option_index = 0
         self.answered = False
         self.choices = choices
-        print('And then here')
         self._init_choices(choices)
         super(InquirerControl, self).__init__(self._get_choice_tokens,
                                               **kwargs)

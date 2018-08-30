@@ -31,9 +31,13 @@ def test_list(example_app):
     example_app.write(keys.ENTER)
     example_app.expect(textwrap.dedent("""\
         ? What size do you need?  Jumbo
-        {
-            "size": "jumbo",
-            "theme": "Order a pizza"
-        }
-        
+        ? Which vehicle you want to use for delivery?  (Use arrow keys)
+         ❯ bike
+           car
+           truck
+           helicopter"""))
+    example_app.write(keys.ENTER)
+    example_app.expect(textwrap.dedent("""\
+        ? Which vehicle you want to use for delivery?  bike
+        {'delivery': 'bike', 'size': 'jumbo', 'theme': 'Order a pizza'}
         """))
