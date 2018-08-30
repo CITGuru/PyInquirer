@@ -12,6 +12,7 @@ def prompt(questions, answers=None, **kwargs):
     if isinstance(questions, dict):
         questions = [questions]
     answers = answers or {}
+
     patch_stdout = kwargs.pop('patch_stdout', False)
     return_asyncio_coroutine = kwargs.pop('return_asyncio_coroutine', False)
     true_color = kwargs.pop('true_color', False)

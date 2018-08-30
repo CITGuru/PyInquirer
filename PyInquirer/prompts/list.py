@@ -109,7 +109,6 @@ def question(message, **kwargs):
         raise PromptParameterException('choices')
 
     choices = kwargs.pop('choices', None)
-    # import pdb; pdb.set_trace()
     default = kwargs.pop('default', 0)  # TODO
     qmark = kwargs.pop('qmark', '?')
     # TODO style defaults on detail level
