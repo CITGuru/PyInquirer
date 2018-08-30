@@ -112,11 +112,16 @@ feature:
 -  password.py
 -  when.py
 -  checkbox.py
+-  confirm.py
 -  hierarchical.py
 -  pizza.py - demonstrate using different question types
 -  editor.py
 -  input.py
 -  rawlist.py
+
+If you want to launch examples with the code from repository instead of
+installing a package you need to execute ``pip install -e .`` within project
+directory.
 
 Question Types
 ~~~~~~~~~~~~~~
