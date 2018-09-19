@@ -5,10 +5,12 @@
 """
 from __future__ import print_function, unicode_literals
 import regex
-
-from PyInquirer import style_from_dict, Token, prompt, print_json
-from PyInquirer import Validator, ValidationError
 from pprint import pprint
+
+from PyInquirer import style_from_dict, Token, prompt
+from PyInquirer import Validator, ValidationError
+
+from examples import custom_style_2
 
 
 class PhoneNumberValidator(Validator):
@@ -18,14 +20,6 @@ class PhoneNumberValidator(Validator):
             raise ValidationError(
                 message='Please enter a valid phone number',
                 cursor_position=len(document.text))  # Move cursor to end
-
-
-style = style_from_dict({
-        Token.QuestionMark: '#FF9D00 bold',
-        Token.Instruction: '',  # default
-        Token.Answer: '#5F819D bold',
-        Token.Question: '',
-    })
 
 
 questions = [
@@ -49,5 +43,5 @@ questions = [
     }
 ]
 
-answers = prompt(questions, style=style)
+answers = prompt(questions, style=custom_style_2)
 pprint(answers)

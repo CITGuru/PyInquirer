@@ -112,11 +112,16 @@ feature:
 -  password.py
 -  when.py
 -  checkbox.py
+-  confirm.py
 -  hierarchical.py
 -  pizza.py - demonstrate using different question types
 -  editor.py
 -  input.py
 -  rawlist.py
+
+If you want to launch examples with the code from repository instead of
+installing a package you need to execute ``pip install -e .`` within project
+directory.
 
 Question Types
 ~~~~~~~~~~~~~~
@@ -305,9 +310,27 @@ Issue on Github TODO link
 For many issues like for example common Python programming issues
 stackoverflow might be a good place to search for an answer. TODO link
 
- ## Contribution
+Contribution
+------------
 
-Yes, you can contribute to this.
+.. code:: shell
+
+    $ git clone git@github.com:bmwant/PyInquirer.git
+    $ cd PyInquirer
+    $ python -m venv venv
+    $ source venv/bin/activate
+    $ pip install --upgrade pip
+    $ pip install -r requirements.txt
+    $ pip install -r requirements_dev.txt
+
+With an environment ready you can add new feature and check everything works
+just fine
+
+.. code:: shell
+
+    $ pytest -sv tests/
+
+That's it, now you can fork a project and submit PR with your change!
 
 License
 -------

@@ -5,7 +5,7 @@ from __future__ import absolute_import, print_function
 from prompt_toolkit.shortcuts import run_application
 
 from . import PromptParameterException, prompts
-from .prompts import list, confirm, input, password, checkbox, rawlist, expand
+from .prompts import list, confirm, input, password, checkbox, rawlist, expand, editor
 
 
 def prompt(questions, answers=None, **kwargs):
