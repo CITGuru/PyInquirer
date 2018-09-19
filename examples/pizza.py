@@ -4,19 +4,14 @@
 * run example by writing `python example/pizza.py` in your console
 """
 from __future__ import print_function, unicode_literals
-import regex
 
-from PyInquirer import style_from_dict, Token, prompt, print_json
-from PyInquirer import Validator, ValidationError
+import regex
 from pprint import pprint
 
-style = style_from_dict({
-    Token.QuestionMark: '#E91E63 bold',
-    Token.Selected: '#673AB7 bold',
-    Token.Instruction: '',  # default
-    Token.Answer: '#2196f3 bold',
-    Token.Question: '',
-})
+from PyInquirer import style_from_dict, Token, prompt
+from PyInquirer import Validator, ValidationError
+
+from examples import custom_style_3
 
 
 class PhoneNumberValidator(Validator):
@@ -110,6 +105,6 @@ questions = [
     }
 ]
 
-answers = prompt(questions, style=style)
+answers = prompt(questions, style=custom_style_3)
 print('Order receipt:')
 pprint(answers)
