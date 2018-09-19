@@ -69,3 +69,5 @@ nosetests.xml
 .project
 .pydevproject
 .pypirc
+
+.vscode/
