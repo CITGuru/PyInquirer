@@ -12,6 +12,7 @@ six-*.egg/
 .idea/
 *.iml
 *.log
+.pytest_cache/
 
 bak
 output

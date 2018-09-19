@@ -6,13 +6,7 @@ from __future__ import print_function, unicode_literals
 
 from PyInquirer import style_from_dict, Token, prompt, print_json
 
-
-style = style_from_dict({
-    Token.QuestionMark: '#FF9D00 bold',
-    Token.Instruction: '',  # default
-    Token.Answer: '#5F819D bold',
-    Token.Question: '',
-})
+from examples import custom_style_2
 
 
 questions = [
@@ -23,5 +17,5 @@ questions = [
     }
 ]
 
-answers = prompt(questions, style=style)
+answers = prompt(questions, style=custom_style_2)
 print_json(answers)
