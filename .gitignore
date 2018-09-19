@@ -72,3 +72,5 @@ nosetests.xml
 .pypirc
 
 .vscode/
+
+localtests/
