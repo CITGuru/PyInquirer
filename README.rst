@@ -31,19 +31,19 @@ Table of Contents
 Goal and Philosophy
 -------------------
 
-**``PyInquirer``** strives to be an easily embeddable and beautiful
+**PyInquirer** strives to be an easily embeddable and beautiful
 command line interface for `Python <https://python.org/>`__.
-**``PyInquirer``** wants to make it easy for existing Inquirer.js users
+**PyInquirer** wants to make it easy for existing Inquirer.js users
 to write immersive command line applications in Python. We are convinced
 that its feature-set is the most complete for building immersive CLI
-applications. We also hope that **``PyInquirer``** proves itself useful
+applications. We also hope that **PyInquirer** proves itself useful
 to Python users.
 
-**``PyInquirer``** should ease the process of - providing *error
+**PyInquirer** should ease the process of - providing *error
 feedback* - *asking questions* - *parsing* input - *validating* answers
 - managing *hierarchical prompts*
 
-**Note:** **``PyInquirer``** provides the user interface and the inquiry
+**Note:** **PyInquirer** provides the user interface and the inquiry
 session flow. >
 
 Documentation
@@ -106,18 +106,18 @@ Examples
 Most of the examples intend to demonstrate a single question type or
 feature:
 
--  bottom-bar.py
--  expand.py
--  list.py
--  password.py
--  when.py
--  checkbox.py
--  confirm.py
--  hierarchical.py
--  pizza.py - demonstrate using different question types
--  editor.py
--  input.py
--  rawlist.py
+-  `editor.py <./examples/editor.py>`_
+-  `expand.py <./examples/expand.py>`_
+-  `list.py <./examples/list.py>`_
+-  `password.py <./examples/password.py>`_
+-  `when.py <./examples/when.py>`_
+-  `checkbox.py <./examples/checkbox.py>`_
+-  `confirm.py <./examples/confirm.py>`_
+-  `hierarchical.py <./examples/hierarchical.py>`_
+-  `pizza.py <./examples/pizza.py>`_ - demonstrate using different question types 
+-  `editor.py <./examples/editor.py>`_
+-  `input.py  <./examples/input.py>`_
+-  `rawlist.py <./examples/rawlist.py>`_
 
 If you want to launch examples with the code from repository instead of
 installing a package you need to execute ``pip install -e .`` within project
