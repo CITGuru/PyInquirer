@@ -315,7 +315,7 @@ Contribution
 
 .. code:: shell
 
-    $ git clone git@github.com:bmwant/PyInquirer.git
+    $ git clone git@github.com:CITGuru/PyInquirer.git
     $ cd PyInquirer
     $ python -m venv venv
     $ source venv/bin/activate
