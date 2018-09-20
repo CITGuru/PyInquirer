@@ -89,8 +89,12 @@ class InquirerControl(TokenListControl):
                 tokens.append((T.Selected if selected else T,
                                '- %s (%s)' % (choice[0], choice[2])))
             else:
-                tokens.append((T.Selected if selected else T, str(choice[0]),
-                               select_item))
+                try:
+                    tokens.append((T.Selected if selected else T, str(choice[0]),
+                                select_item))
+                except:
+                    tokens.append((T.Selected if selected else T, choice[0],
+                                select_item))
             tokens.append((T, '\n'))
 
         # prepare the select choices
