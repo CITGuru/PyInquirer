@@ -2,9 +2,9 @@
 """
 `input` type question
 """
+from __future__ import print_function, unicode_literals
 import os
 import sys
-from __future__ import print_function, unicode_literals
 from prompt_toolkit.token import Token
 from prompt_toolkit.shortcuts import create_prompt_application
 from prompt_toolkit.validation import Validator, ValidationError
