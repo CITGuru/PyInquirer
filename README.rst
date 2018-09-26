@@ -269,7 +269,7 @@ Question Properties
 A question is a dictionary containing question related values:
 
 -  type: (String) Type of the prompt. Defaults: input - Possible values:
-    input, confirm, list, rawlist, expand, checkbox, password, editor
+   input, confirm, list, rawlist, expand, checkbox, password, editor
 -  name: (String) The name to use when storing the answer in the answers
    hash. If the name contains periods, it will define a path in the
    answers hash.
