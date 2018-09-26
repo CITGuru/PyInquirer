@@ -249,13 +249,13 @@ case a file is edited directly the return value is always ``None`` and
 
 Takes:
 
--  ``editor``: accepts ``default`` to get the default platform editor. But
-    you can also provide the path to an editor e.g ``vi``.
--  ``ext``: the extension to tell the editor about. This defaults to `.txt` 
-    but changing this might change syntax highlighting e.g ".py"
--  ``save``: accepts ``True`` or ``False`` to determine to save a file.
--  ``filename``: accepts the path of a file you'd like to edit.
--  ``env``: accepts any given environment variables to pass to the editor
+-  editor: accepts ``default`` to get the default platform editor. But 
+   you can also provide the path to an editor e.g ``vi``.
+-  ext: the extension to tell the editor about. This defaults to `.txt` 
+   but changing this might change syntax highlighting e.g ".py"
+-  save: accepts ``True`` or ``False`` to determine to save a file.
+-  filename: accepts the path of a file you'd like to edit.
+-  env: accepts any given environment variables to pass to the editor
 
 Launches an instance of the users preferred editor on a temporary file.
 Once the user exits their editor, the contents of the temporary file are
@@ -269,7 +269,7 @@ Question Properties
 A question is a dictionary containing question related values:
 
 -  type: (String) Type of the prompt. Defaults: input - Possible values:
-   input, confirm, list, rawlist, expand, checkbox, password, editor
+    input, confirm, list, rawlist, expand, checkbox, password, editor
 -  name: (String) The name to use when storing the answer in the answers
    hash. If the name contains periods, it will define a path in the
    answers hash.
