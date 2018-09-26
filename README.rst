@@ -235,12 +235,30 @@ Editor - ``{type: 'editor'}``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Take ``type``, ``name``, ``message``\ [, ``default``, ``filter``,
-``validate``] properties
+``validate``, ``eargs``] properties
+
+### Editor Arguments - ``eargs`
+
+Opens an empty or edits the default text in the defined editor.  If an editor is given
+(should be the full path to the executable but the regular operating
+system search path is used for finding the executable) it overrides
+the detected editor.  Optionally, some environment variables can be
+used.  If the editor is closed without changes, `None` is returned.  In
+case a file is edited directly the return value is always ``None`` and
+``save`` and ``ext`` are ignored.
+
+Take - ``editor``: accepts ``default`` to get the default platform editor. But
+        you can also provide the path to an editor e.g ``vi``.
+        ``ext``: the extension to tell the editor about. This defaults to `.txt` 
+        but changing this might change syntax highlighting e.g ".py"
+        ``save``: accepts ``True`` or ``False`` to determine to save a file.
+        ``filename``: accepts the path of a file you'd like to edit.
+        ``env``: accepts any given environment variables to pass to the editor
 
 Launches an instance of the users preferred editor on a temporary file.
 Once the user exits their editor, the contents of the temporary file are
 read in as the result. The editor to use is determined by reading the
-:math:`VISUAL or `\ EDITOR environment variables. If neither of those
+:math:``VISUAL or ``\ EDITOR environment variables. If neither of those
 are present, notepad (on Windows) or vim (Linux or Mac) is used.
 
 Question Properties
