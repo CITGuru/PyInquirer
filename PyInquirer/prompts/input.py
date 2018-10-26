@@ -2,6 +2,7 @@
 """
 `input` type question
 """
+import inspect
 from __future__ import print_function, unicode_literals
 from prompt_toolkit.token import Token
 from prompt_toolkit.shortcuts import create_prompt_application
@@ -17,7 +18,7 @@ def question(message, **kwargs):
     default = kwargs.pop('default', '')
     validate_prompt = kwargs.pop('validate', None)
     if validate_prompt:
-        if issubclass(validate_prompt, Validator):
+        if inspect.isclass(validate_prompt) and issubclass(validate_prompt, Validator):
             kwargs['validator'] = validate_prompt()
         elif callable(validate_prompt):
             class _InputValidator(Validator):
