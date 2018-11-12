@@ -5,7 +5,8 @@
 from __future__ import print_function, unicode_literals
 
 from PyInquirer import style_from_dict, Token, prompt, print_json
-from PyInquirer import Validator, ValidationError, default_style
+from PyInquirer import Validator, ValidationError
+from examples import custom_style_2
 from pprint import pprint
 
 
@@ -23,5 +24,5 @@ questions = [
     }
 ]
 
-answers = prompt(questions, style=default_style)
+answers = prompt(questions, style=custom_style_2)
 pprint(answers)
