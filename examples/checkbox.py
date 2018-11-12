@@ -9,7 +9,7 @@ from pprint import pprint
 
 from PyInquirer import style_from_dict, Token, prompt, Separator
 
-from examples import default_style
+from examples import custom_style_2
 
 
 questions = [
@@ -67,5 +67,5 @@ questions = [
     }
 ]
 
-answers = prompt(questions, style=default_style)
+answers = prompt(questions, style=custom_style_2)
 pprint(answers)
