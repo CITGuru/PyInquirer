@@ -2,8 +2,8 @@
 """
 `input` type question
 """
-import inspect
 from __future__ import print_function, unicode_literals
+import inspect
 from prompt_toolkit.token import Token
 from prompt_toolkit.shortcuts import create_prompt_application
 from prompt_toolkit.validation import Validator, ValidationError
