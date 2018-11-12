@@ -1,6 +1,8 @@
 # this file contains additional dependencies (not in requirements.txt)
 # please list all dependencies necessary to test and build this package
 
+-r requirements.txt
+
 # test-tools
 testfixtures
 pytest>=3.0.7
@@ -14,3 +16,4 @@ ptyprocess==0.5.1
 pep8>=1.7.0
 bumpversion>=0.5.3
 pypandoc>=1.3.3
+

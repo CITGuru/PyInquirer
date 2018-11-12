@@ -14,7 +14,12 @@ questions = [
         'type': 'editor',
         'name': 'bio',
         'message': 'Please write a short bio of at least 3 lines.',
-        # 'validate': lambda text: len(text.split('\n')) >= 3 or 'Must be at least 3 lines.'
+        'default': 'Hello World',
+        'validate': lambda text: len(text.split('\n')) >= 3 or 'Must be at least 3 lines.',
+        'eargs': {
+            'editor':'default',
+            'ext':'.py'
+        }
     }
 ]
 
