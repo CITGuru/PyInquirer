@@ -10,6 +10,7 @@ from prompt_toolkit.layout.containers import Window, HSplit
 from prompt_toolkit.layout.controls import TokenListControl
 from prompt_toolkit.layout.dimension import LayoutDimension as D
 from prompt_toolkit.token import Token
+from prompt_toolkit.shortcuts import create_prompt_application
 from prompt_toolkit.styles import style_from_dict
 
 
@@ -47,15 +48,6 @@ def question(message, **kwargs):
             tokens.append((Token.Instruction, instruction))
         return tokens
 
-    # assemble layout
-    # TODO this does not work without the HSplit??
-    layout = HSplit([
-        Window(
-            height=D.exact(1),
-            content=TokenListControl(get_prompt_tokens, align_center=False),
-        )
-    ])
-
     # key bindings
     manager = KeyBindingManager.for_prompt()
 
@@ -81,8 +73,8 @@ def question(message, **kwargs):
         status['answer'] = default
         event.cli.set_return_value(default)
 
-    return Application(
-        layout=layout,
+    return create_prompt_application(
+        get_prompt_tokens=get_prompt_tokens,
         key_bindings_registry=manager.registry,
         mouse_support=False,
         style=style,
