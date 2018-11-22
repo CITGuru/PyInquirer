@@ -10,6 +10,12 @@ to rewrite it for my own need. But don't worry any new fix on the main
 Repo, will be added to it if needed. Lastly, I am currently working on
 the author's TODO.
 
+PyInquirer 1.0.3 Bugfix Update
+-----------------
+
+`PyInquirer 1.0.3 <https://github.com/CITGuru/PyInquirer/releases/tag/1.0.3>`
+
+
 Table of Contents
 -----------------
 
