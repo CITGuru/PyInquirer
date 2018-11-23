@@ -2,81 +2,77 @@
 """
 confirm type question
 """
-from __future__ import print_function, unicode_literals
-from prompt_toolkit.application import Application
-from prompt_toolkit.key_binding.manager import KeyBindingManager
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
+from prompt_toolkit import PromptSession
+from prompt_toolkit.formatted_text import (
+    to_formatted_text)
+from prompt_toolkit.key_binding import KeyBindings
 from prompt_toolkit.keys import Keys
-from prompt_toolkit.layout.containers import Window, HSplit
-from prompt_toolkit.layout.controls import TokenListControl
-from prompt_toolkit.layout.dimension import LayoutDimension as D
-from prompt_toolkit.token import Token
-from prompt_toolkit.shortcuts import create_prompt_application
-from prompt_toolkit.styles import style_from_dict
+from prompt_toolkit.styles import merge_styles
+
+from PyInquirer.constants import NO_OR_YES, YES, NO, YES_OR_NO, DEFAULT_STYLE
 
 
-# custom control based on TokenListControl
+def question(message,
+             qmark="?",
+             default=True,
+             style=None,
+             **kwargs):
+    """Create a `PromptSession` object for the 'confirm' function."""
 
+    merged_style = merge_styles([DEFAULT_STYLE, style])
 
-def question(message, **kwargs):
-    # TODO need ENTER confirmation
-    default = kwargs.pop('default', True)
-
-    # TODO style defaults on detail level
-    style = kwargs.pop('style', style_from_dict({
-        Token.QuestionMark: '#5F819D',
-        #Token.Selected: '#FF9D00',  # AWS orange
-        Token.Instruction: '',  # default
-        Token.Answer: '#FF9D00 bold',  # AWS orange
-        Token.Question: 'bold',
-    }))
     status = {'answer': None}
 
-    qmark = kwargs.pop('qmark', '?')
-
-    def get_prompt_tokens(cli):
+    def get_prompt_tokens():
         tokens = []
 
-        tokens.append((Token.QuestionMark, qmark))
-        tokens.append((Token.Question, ' %s ' % message))
-        if isinstance(status['answer'], bool):
-            tokens.append((Token.Answer, ' Yes' if status['answer'] else ' No'))
+        tokens.append(("class:qmark", qmark))
+        tokens.append(("class:question", ' {} '.format(message)))
+
+        if status['answer'] is not None:
+            answer = ' {}'.format(YES if status['answer'] else NO)
+            tokens.append(("class:answer", answer))
         else:
-            if default:
-                instruction = ' (Y/n)'
-            else:
-                instruction = ' (y/N)'
-            tokens.append((Token.Instruction, instruction))
-        return tokens
+            instruction = ' {}'.format(YES_OR_NO if default else NO_OR_YES)
+            tokens.append(("class:instruction", instruction))
 
-    # key bindings
-    manager = KeyBindingManager.for_prompt()
+        return to_formatted_text(tokens)
 
-    @manager.registry.add_binding(Keys.ControlQ, eager=True)
-    @manager.registry.add_binding(Keys.ControlC, eager=True)
+    bindings = KeyBindings()
+
+    @bindings.add(Keys.ControlQ, eager=True)
+    @bindings.add(Keys.ControlC, eager=True)
     def _(event):
         raise KeyboardInterrupt()
 
-    @manager.registry.add_binding('n')
-    @manager.registry.add_binding('N')
+    @bindings.add('n')
+    @bindings.add('N')
     def key_n(event):
         status['answer'] = False
-        event.cli.set_return_value(False)
+        event.app.exit(result=False)
 
-    @manager.registry.add_binding('y')
-    @manager.registry.add_binding('Y')
+    @bindings.add('y')
+    @bindings.add('Y')
     def key_y(event):
         status['answer'] = True
-        event.cli.set_return_value(True)
+        event.app.exit(result=True)
 
-    @manager.registry.add_binding(Keys.Enter, eager=True)
+    @bindings.add(Keys.ControlM, eager=True)
     def set_answer(event):
         status['answer'] = default
-        event.cli.set_return_value(default)
+        event.app.exit(result=default)
 
-    return create_prompt_application(
-        get_prompt_tokens=get_prompt_tokens,
-        key_bindings_registry=manager.registry,
-        mouse_support=False,
-        style=style,
-        erase_when_done=False,
-    )
+    @bindings.add(Keys.Any)
+    def other(event):
+        """Disallow inserting other text."""
+        pass
+
+    return PromptSession(get_prompt_tokens,
+                         key_bindings=bindings,
+                         style=merged_style,
+                         **kwargs).app

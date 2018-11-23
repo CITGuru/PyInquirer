@@ -2,23 +2,28 @@
 
 from __future__ import absolute_import, print_function
 
-from prompt_toolkit.shortcuts import run_application
-
-from . import PromptParameterException, prompts
-from .prompts import list, confirm, input, password, checkbox, rawlist, expand, editor
+from PyInquirer import prompts, utils
 
 
-def prompt(questions, answers=None, **kwargs):
+class PromptParameterException(ValueError):
+    def __init__(self, message, errors=None):
+        # Call the base class constructor with the parameters it needs
+        super(PromptParameterException, self).__init__(
+            'You must provide a `%s` value' % message, errors)
+
+
+def prompt(questions, answers=None,
+           patch_stdout=False,
+           return_asyncio_coroutine=False,
+           true_color=False,
+           refresh_interval=0,
+           eventloop=None,
+           kbi_msg='Cancelled by user',
+           **kwargs):
     if isinstance(questions, dict):
         questions = [questions]
-    answers = answers or {}
 
-    patch_stdout = kwargs.pop('patch_stdout', False)
-    return_asyncio_coroutine = kwargs.pop('return_asyncio_coroutine', False)
-    true_color = kwargs.pop('true_color', False)
-    refresh_interval = kwargs.pop('refresh_interval', 0)
-    eventloop = kwargs.pop('eventloop', None)
-    kbi_msg = kwargs.pop('keyboard_interrupt_msg', 'Cancelled by user')
+    answers = answers or {}
 
     for question in questions:
         # import the question
@@ -28,20 +33,21 @@ def prompt(questions, answers=None, **kwargs):
             raise PromptParameterException('name')
         if 'message' not in question:
             raise PromptParameterException('message')
+
+        choices = question.get('choices')
+        if choices is not None and callable(choices):
+            question['choices'] = choices(answers)
+
+        _kwargs = {}
+        _kwargs.update(kwargs)
+        _kwargs.update(question)
+        _type = _kwargs.pop('type')
+        name = _kwargs.pop('name')
+        message = _kwargs.pop('message')
+        when = _kwargs.pop('when', None)
+        _filter = _kwargs.pop('filter', None)
+
         try:
-            choices = question.get('choices')
-            if choices is not None and callable(choices):
-                question['choices'] = choices(answers)
-
-            _kwargs = {}
-            _kwargs.update(kwargs)
-            _kwargs.update(question)
-            type = _kwargs.pop('type')
-            name = _kwargs.pop('name')
-            message = _kwargs.pop('message')
-            when = _kwargs.pop('when', None)
-            filter = _kwargs.pop('filter', None)
-
             if when:
                 # at least a little sanity check!
                 if callable(question['when']):
@@ -49,50 +55,47 @@ def prompt(questions, answers=None, **kwargs):
                         if not question['when'](answers):
                             continue
                     except Exception as e:
-                        raise ValueError(
-                            'Problem in \'when\' check of %s question: %s' %
-                            (name, e))
+                        raise ValueError("Problem in 'when' check of {} "
+                                         "question: {}".format(name, e))
                 else:
-                    raise ValueError('\'when\' needs to be function that ' \
-                                     'accepts a dict argument')
-            if filter:
+                    raise ValueError("'when' needs to be function that "
+                                     "accepts a dict argument")
+            if _filter:
                 # at least a little sanity check!
-                if not callable(question['filter']):
-                    raise ValueError('\'filter\' needs to be function that ' \
-                                     'accepts an argument')
+                if not callable(_filter):
+                    raise ValueError("'filter' needs to be function that "
+                                     "accepts an argument")
 
             if callable(question.get('default')):
                 _kwargs['default'] = question['default'](answers)
-            
-            application = getattr(prompts, type).question(message, **_kwargs)
 
-            answer = run_application(
-                application,
-                patch_stdout=patch_stdout,
-                return_asyncio_coroutine=return_asyncio_coroutine,
-                true_color=true_color,
-                refresh_interval=refresh_interval,
-                eventloop=eventloop)
+            question_f = getattr(prompts, _type).question
+
+            missing_args = list(utils.missing_arguments(question_f, _kwargs))
+            if missing_args:
+                raise PromptParameterException(missing_args[0])
+
+            application = question_f(message, **_kwargs)
+
+            answer = application.run()
 
             if answer is not None:
-                if filter:
+                if _filter:
                     try:
-                        answer = question['filter'](answer)
+                        answer = _filter(answer)
                     except Exception as e:
-                        raise ValueError(
-                            'Problem processing \'filter\' of %s question: %s' %
-                            (name, e))
+                        raise ValueError("Problem processing 'filter' of {} "
+                                         "question: {}".format(name, e))
                 answers[name] = answer
         except AttributeError as e:
             print(e)
-            raise ValueError('No question type \'%s\'' % type)
+            raise ValueError("No question type '{}'".format(_type))
         except KeyboardInterrupt:
             print('')
             print(kbi_msg)
             print('')
             return {}
     return answers
-
 
 # TODO:
 # Bottom Bar - inquirer.ui.BottomBar

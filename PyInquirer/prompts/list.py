@@ -2,32 +2,28 @@
 """
 `list` type question
 """
+from __future__ import absolute_import
+from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
 import sys
 
 from prompt_toolkit.application import Application
-from prompt_toolkit.key_binding.manager import KeyBindingManager
-from prompt_toolkit.keys import Keys
-from prompt_toolkit.layout.containers import Window
 from prompt_toolkit.filters import IsDone
-from prompt_toolkit.layout.controls import TokenListControl
-from prompt_toolkit.layout.containers import ConditionalContainer, \
-    ScrollOffsets, HSplit
-from prompt_toolkit.layout.dimension import LayoutDimension as D
-from prompt_toolkit.token import Token
+from prompt_toolkit.key_binding import KeyBindings
+from prompt_toolkit.keys import Keys
+from prompt_toolkit.layout import FormattedTextControl, Layout
+from prompt_toolkit.layout.containers import (
+    ConditionalContainer,
+    HSplit)
+from prompt_toolkit.layout.containers import Window
+from prompt_toolkit.shortcuts.prompt import (
+    PromptSession)
+from prompt_toolkit.styles import merge_styles
 
-from .. import PromptParameterException
-from ..separator import Separator
-from .common import if_mousedown, default_style
-
-# custom control based on TokenListControl
-# docu here:
-# https://github.com/jonathanslenders/python-prompt-toolkit/issues/281
-# https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/full-screen-layout.py
-# https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/docs/pages/full_screen_apps.rst
-
+from PyInquirer.constants import DEFAULT_STYLE
+from PyInquirer.separator import Separator
 
 PY3 = sys.version_info[0] >= 3
 
@@ -35,7 +31,7 @@ if PY3:
     basestring = str
 
 
-class InquirerControl(TokenListControl):
+class InquirerControl(FormattedTextControl):
     def __init__(self, choices, **kwargs):
         self.selected_option_index = 0
         self.answered = False
@@ -67,35 +63,27 @@ class InquirerControl(TokenListControl):
     def choice_count(self):
         return len(self.choices)
 
-    def _get_choice_tokens(self, cli):
+    def _get_choice_tokens(self):
         tokens = []
-        T = Token
 
         def append(index, choice):
             selected = (index == self.selected_option_index)
 
-            @if_mousedown
-            def select_item(cli, mouse_event):
-                # bind option with this index to mouse event
-                self.selected_option_index = index
-                self.answered = True
-                cli.set_return_value(None)
-
-            tokens.append((T.Pointer if selected else T, ' \u276f ' if selected
-            else '   '))
             if selected:
-                tokens.append((Token.SetCursorPosition, ''))
-            if choice[2]:  # disabled
-                tokens.append((T.Selected if selected else T,
-                               '- %s (%s)' % (choice[0], choice[2])))
+                tokens.append(("class:pointer", ' \u276f '))
+                tokens.append(('[SetCursorPosition]', ''))
             else:
-                try:
-                    tokens.append((T.Selected if selected else T, str(choice[0]),
-                                select_item))
-                except:
-                    tokens.append((T.Selected if selected else T, choice[0],
-                                select_item))
-            tokens.append((T, '\n'))
+                tokens.append(("", '   '))
+
+            if isinstance(choice[0], Separator):
+                tokens.append(("class:separator", "{}".format(choice[0])))
+            elif choice[2]:  # disabled
+                tokens.append(("class:selected" if selected else "",
+                               '- {} ({})'.format(choice[0], choice[2])))
+            else:
+                tokens.append(("class:selected" if selected else "",
+                               "{}".format(choice[0])))
+            tokens.append(("", '\n'))
 
         # prepare the select choices
         for i, choice in enumerate(self.choices):
@@ -103,82 +91,93 @@ class InquirerControl(TokenListControl):
         tokens.pop()  # Remove last newline.
         return tokens
 
+    def is_selection_a_separator(self):
+        selected = self.choices[self.selected_option_index]
+        return isinstance(selected[0], Separator)
+
+    def is_selection_disabled(self):
+        return self.choices[self.selected_option_index][2]
+
+    def is_selection_valid(self):
+        return (not self.is_selection_disabled() and
+                not self.is_selection_a_separator())
+
+    def select_next(self):
+        self.selected_option_index = (
+            (self.selected_option_index - 1) % self.choice_count)
+
+    def select_previous(self):
+        self.selected_option_index = (
+            (self.selected_option_index + 1) % self.choice_count)
+
     def get_selection(self):
         return self.choices[self.selected_option_index]
 
 
-def question(message, **kwargs):
-    # TODO disabled, dict choices
-    if not 'choices' in kwargs:
-        raise PromptParameterException('choices')
-
-    choices = kwargs.pop('choices', None)
-    default = kwargs.pop('default', 0)  # TODO
-    qmark = kwargs.pop('qmark', '?')
-    # TODO style defaults on detail level
-    style = kwargs.pop('style', default_style)
+def question(message,
+             choices,
+             default=0,
+             qmark="?",
+             style=None,
+             **kwargs):
+    merged_style = merge_styles([DEFAULT_STYLE, style])
 
     ic = InquirerControl(choices)
 
-    def get_prompt_tokens(cli):
+    def get_prompt_tokens():
         tokens = []
 
-        tokens.append((Token.QuestionMark, qmark))
-        tokens.append((Token.Question, ' %s ' % message))
+        tokens.append(("class:qmark", qmark))
+        tokens.append(("class:question", ' {} '.format(message)))
         if ic.answered:
-            tokens.append((Token.Answer, ' ' + ic.get_selection()[0]))
+            tokens.append(("class:answer", ' ' + ic.get_selection()[0]))
         else:
-            tokens.append((Token.Instruction, ' (Use arrow keys)'))
+            tokens.append(("class:instruction", ' (Use arrow keys)'))
+
         return tokens
 
-    # assemble layout
-    layout = HSplit([
-        Window(height=D.exact(1),
-               content=TokenListControl(get_prompt_tokens)
-        ),
+    ps = PromptSession(get_prompt_tokens, reserve_space_for_menu=0)
+
+    layout = Layout(HSplit([
+        ps.layout.container,
         ConditionalContainer(
             Window(ic),
             filter=~IsDone()
         )
-    ])
+    ]))
 
-    # key bindings
-    manager = KeyBindingManager.for_prompt()
+    bindings = KeyBindings()
 
-    @manager.registry.add_binding(Keys.ControlQ, eager=True)
-    @manager.registry.add_binding(Keys.ControlC, eager=True)
+    @bindings.add(Keys.ControlQ, eager=True)
+    @bindings.add(Keys.ControlC, eager=True)
     def _(event):
         raise KeyboardInterrupt()
-        # event.cli.set_return_value(None)
 
-    @manager.registry.add_binding(Keys.Down, eager=True)
+    @bindings.add(Keys.Down, eager=True)
     def move_cursor_down(event):
-        def _next():
-            ic.selected_option_index = (
-                (ic.selected_option_index + 1) % ic.choice_count)
-        _next()
-        while isinstance(ic.choices[ic.selected_option_index][0], Separator) or\
-                ic.choices[ic.selected_option_index][2]:
-            _next()
+        ic.select_previous()
+        while not ic.is_selection_valid():
+            ic.select_previous()
 
-    @manager.registry.add_binding(Keys.Up, eager=True)
+    @bindings.add(Keys.Up, eager=True)
     def move_cursor_up(event):
-        def _prev():
-            ic.selected_option_index = (
-                (ic.selected_option_index - 1) % ic.choice_count)
-        _prev()
-        while isinstance(ic.choices[ic.selected_option_index][0], Separator) or \
-                ic.choices[ic.selected_option_index][2]:
-            _prev()
+        ic.select_next()
+        while not ic.is_selection_valid():
+            ic.select_next()
 
-    @manager.registry.add_binding(Keys.Enter, eager=True)
+    @bindings.add(Keys.ControlM, eager=True)
     def set_answer(event):
         ic.answered = True
-        event.cli.set_return_value(ic.get_selection()[1])
+        event.app.exit(result=ic.get_selection()[1])
+
+    @bindings.add(Keys.Any)
+    def other(event):
+        """Disallow inserting other text. """
+        pass
 
     return Application(
         layout=layout,
-        key_bindings_registry=manager.registry,
-        mouse_support=True,
-        style=style
+        key_bindings=bindings,
+        style=merged_style,
+        **kwargs
     )

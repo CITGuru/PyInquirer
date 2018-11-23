@@ -6,25 +6,11 @@ common prompt functionality
 import sys
 
 from prompt_toolkit.validation import Validator, ValidationError
-from prompt_toolkit.styles import style_from_dict
-from prompt_toolkit.token import Token
-from prompt_toolkit.mouse_events import MouseEventTypes
-
 
 PY3 = sys.version_info[0] >= 3
 
 if PY3:
     basestring = str
-
-
-def if_mousedown(handler):
-    def handle_if_mouse_down(cli, mouse_event):
-        if mouse_event.event_type == MouseEventTypes.MOUSE_DOWN:
-            return handler(cli, mouse_event)
-        else:
-            return NotImplemented
-
-    return handle_if_mouse_down
 
 
 # TODO probably better to use base.Condition
@@ -78,15 +64,3 @@ def setup_simple_validator(kwargs):
                 message='invalid input'
                 )
     return _validator
-
-
-# FIXME style defaults on detail level
-default_style = style_from_dict({
-    Token.Separator: '#6C6C6C',
-    Token.QuestionMark: '#5F819D',
-    Token.Selected: '',  # default
-    Token.Pointer: '#FF9D00 bold',  # AWS orange
-    Token.Instruction: '',  # default
-    Token.Answer: '#FF9D00 bold',  # AWS orange
-    Token.Question: 'bold',
-})

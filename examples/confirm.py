@@ -11,7 +11,6 @@ from PyInquirer import prompt
 
 from examples import custom_style_1
 
-
 questions = [
     {
         'type': 'confirm',
@@ -21,7 +20,10 @@ questions = [
     },
     {
         'type': 'confirm',
-        'message': 'Do you want to exit? Oh, I haven\'t actually experience that. I\'ll look into it. Under your repository name, click Pull requests. Under your repository name, click Pull requests.',
+        'message': "Do you want to exit? Oh, I haven't actually experience "
+                   "that. I'll look into it. Under your repository name, "
+                   "click Pull requests. Under your repository name, "
+                   "click Pull requests.",
         'name': 'exit',
         'default': False,
     },
@@ -29,4 +31,3 @@ questions = [
 
 answers = prompt(questions, style=custom_style_1)
 pprint(answers)
-

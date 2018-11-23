@@ -1,33 +1,26 @@
-from PyInquirer import style_from_dict, Token
+from prompt_toolkit.styles import Style
 
+custom_style_1 = Style([
+    ('separator', 'fg:#cc5454'),
+    ('qmark', 'fg:#673ab7 bold'),
+    ('question', ''),
+    ('selected', 'fg:#cc5454'),
+    ('pointer', 'fg:#673ab7 bold'),
+    ('answer', 'fg:#f44336 bold'),
+])
 
-custom_style_1 = style_from_dict({
-    Token.Separator: '#cc5454',
-    Token.QuestionMark: '#673ab7 bold',
-    Token.Selected: '#cc5454',  # default
-    Token.Pointer: '#673ab7 bold',
-    Token.Instruction: '',  # default
-    Token.Answer: '#f44336 bold',
-    Token.Question: '',
-})
+custom_style_2 = Style([
+    ('separator', 'fg:#6C6C6C'),
+    ('qmark', 'fg:#FF9D00 bold'),
+    ('question', ''),
+    ('selected', 'fg:#5F819D'),
+    ('pointer', 'fg:#FF9D00 bold'),
+    ('answer', 'fg:#5F819D bold'),
+])
 
-
-custom_style_2 = style_from_dict({
-    Token.Separator: '#6C6C6C',
-    Token.QuestionMark: '#FF9D00 bold',
-    #Token.Selected: '',  # default
-    Token.Selected: '#5F819D',
-    Token.Pointer: '#FF9D00 bold',
-    Token.Instruction: '',  # default
-    Token.Answer: '#5F819D bold',
-    Token.Question: '',
-})
-
-
-custom_style_3 = style_from_dict({
-    Token.QuestionMark: '#E91E63 bold',
-    Token.Selected: '#673AB7 bold',
-    Token.Instruction: '',  # default
-    Token.Answer: '#2196f3 bold',
-    Token.Question: '',
-})
+custom_style_3 = Style([
+    ('qmark', 'fg:#E91E63 bold'),
+    ('question', ''),
+    ('selected', 'fg:#673AB7 bold'),
+    ('answer', 'fg:#2196f3 bold'),
+])

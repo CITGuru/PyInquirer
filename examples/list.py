@@ -6,10 +6,8 @@ from __future__ import print_function, unicode_literals
 
 from pprint import pprint
 
-from PyInquirer import style_from_dict, Token, prompt, Separator
-
+from PyInquirer import prompt, Separator
 from examples import custom_style_2
-
 
 
 def get_delivery_options(answers):
