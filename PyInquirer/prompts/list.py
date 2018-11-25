@@ -22,7 +22,7 @@ from prompt_toolkit.shortcuts.prompt import (
     PromptSession)
 from prompt_toolkit.styles import merge_styles
 
-from PyInquirer.constants import DEFAULT_STYLE
+from PyInquirer.constants import DEFAULT_STYLE, SELECTED_POINTER
 from PyInquirer.separator import Separator
 
 PY3 = sys.version_info[0] >= 3
@@ -70,13 +70,15 @@ class InquirerControl(FormattedTextControl):
             selected = (index == self.selected_option_index)
 
             if selected:
-                tokens.append(("class:pointer", ' \u276f '))
+                tokens.append(("class:pointer",
+                               ' {} '.format(SELECTED_POINTER)))
                 tokens.append(('[SetCursorPosition]', ''))
             else:
                 tokens.append(("", '   '))
 
             if isinstance(choice[0], Separator):
-                tokens.append(("class:separator", "{}".format(choice[0])))
+                tokens.append(("class:separator",
+                               "{}".format(choice[0])))
             elif choice[2]:  # disabled
                 tokens.append(("class:selected" if selected else "",
                                '- {} ({})'.format(choice[0], choice[2])))

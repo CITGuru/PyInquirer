@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -12,6 +14,8 @@ NO = "No"
 YES_OR_NO = "(Y/n)"
 
 NO_OR_YES = "(y/N)"
+
+SELECTED_POINTER = "»"
 
 DEFAULT_STYLE = Style([
     ('qmark', 'fg:#5f819d'),
