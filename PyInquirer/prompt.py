@@ -2,7 +2,10 @@
 
 from __future__ import absolute_import, print_function
 
+from prompt_toolkit.output import ColorDepth
+
 from PyInquirer import prompts, utils
+import prompt_toolkit.patch_stdout
 
 
 class PromptParameterException(ValueError):
@@ -12,12 +15,10 @@ class PromptParameterException(ValueError):
             'You must provide a `%s` value' % message, errors)
 
 
-def prompt(questions, answers=None,
+def prompt(questions,
+           answers=None,
            patch_stdout=False,
-           return_asyncio_coroutine=False,
            true_color=False,
-           refresh_interval=0,
-           eventloop=None,
            kbi_msg='Cancelled by user',
            **kwargs):
     if isinstance(questions, dict):
@@ -46,6 +47,9 @@ def prompt(questions, answers=None,
         message = _kwargs.pop('message')
         when = _kwargs.pop('when', None)
         _filter = _kwargs.pop('filter', None)
+
+        if true_color:
+            _kwargs["color_depth"] = ColorDepth.TRUE_COLOR
 
         try:
             if when:
@@ -77,7 +81,11 @@ def prompt(questions, answers=None,
 
             application = question_f(message, **_kwargs)
 
-            answer = application.run()
+            if patch_stdout:
+                with prompt_toolkit.patch_stdout.patch_stdout():
+                    answer = application.run()
+            else:
+                answer = application.run()
 
             if answer is not None:
                 if _filter:
