@@ -151,7 +151,7 @@ def question(message,
     @bindings.add(Keys.ControlQ, eager=True)
     @bindings.add(Keys.ControlC, eager=True)
     def _(event):
-        raise KeyboardInterrupt()
+        event.app.exit(exception=KeyboardInterrupt, style='class:aborting')
 
     @bindings.add(Keys.Down, eager=True)
     def move_cursor_down(event):
