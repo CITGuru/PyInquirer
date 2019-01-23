@@ -86,7 +86,7 @@ Quickstart
 Like Inquirer.js, using inquirer is structured into two simple steps:
 
 -  you define a **list of questions** and hand them to **prompt**
--  promt returns a **list of answers**
+-  prompt returns a **list of answers**
 
 .. code:: python
 
