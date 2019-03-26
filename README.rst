@@ -369,6 +369,6 @@ Copyright (c) 2018 Oyetoke Toby (twitter: @oyetokeT)
 
 Licensed under the MIT license.
 
-.. |List prompt| image:: https://raw.githubusercontent.com/citguru/PyInquirer/master/docs/images/input-prompt.png
+.. |List prompt| image:: https://raw.githubusercontent.com/citguru/PyInquirer/master/docs/images/list-prompt.png
 .. |Expand prompt closed| image:: https://raw.githubusercontent.com/citguru/PyInquirer/master/docs/images/expand-prompt-1.png
 .. |Expand prompt expanded| image:: https://raw.githubusercontent.com/citguru/PyInquirer/master/docs/images/expand-prompt-2.png
