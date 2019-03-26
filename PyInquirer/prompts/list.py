@@ -79,7 +79,7 @@ class InquirerControl(TokenListControl):
                 # bind option with this index to mouse event
                 self.selected_option_index = index
                 self.answered = True
-                cli.set_return_value(None)
+                cli.set_return_value(self.get_selection()[1])
 
             tokens.append((T.Pointer if selected else T, ' \u276f ' if selected
             else '   '))
