@@ -7,7 +7,7 @@ from __future__ import print_function, unicode_literals
 import regex
 from pprint import pprint
 
-from PyInquirer import style_from_dict, Token, prompt
+from PyInquirer import prompt
 from PyInquirer import Validator, ValidationError
 
 from examples import custom_style_2
@@ -39,6 +39,7 @@ questions = [
         'type': 'input',
         'name': 'phone',
         'message': 'What\'s your phone number',
+        'default': '08182315466',
         'validate': PhoneNumberValidator
     }
 ]

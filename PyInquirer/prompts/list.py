@@ -151,6 +151,7 @@ def question(message,
     @bindings.add(Keys.ControlQ, eager=True)
     @bindings.add(Keys.ControlC, eager=True)
     def _(event):
+        sys.exit()
         raise KeyboardInterrupt()
 
     @bindings.add(Keys.Down, eager=True)

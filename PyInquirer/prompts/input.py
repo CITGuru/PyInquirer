@@ -2,20 +2,38 @@
 """
 `input` type question
 """
-from __future__ import print_function, unicode_literals
-import inspect
-from prompt_toolkit.token import Token
-from prompt_toolkit.shortcuts import create_prompt_application
-from prompt_toolkit.validation import Validator, ValidationError
-from prompt_toolkit.layout.lexers import SimpleLexer
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
 
-from .common import default_style
+import sys
+
+import inspect
+from prompt_toolkit.styles import merge_styles
+from prompt_toolkit.application import Application
+from prompt_toolkit import PromptSession
+
+from prompt_toolkit.validation import Validator, ValidationError
+# from prompt_toolkit.layout.lexers import SimpleLexer
+from prompt_toolkit.layout import FormattedTextControl, Layout
+from PyInquirer.constants import NO_OR_YES, YES, NO, YES_OR_NO, DEFAULT_STYLE
+from prompt_toolkit.key_binding import KeyBindings
+from prompt_toolkit.keys import Keys
 
 # use std prompt-toolkit control
 
 
-def question(message, **kwargs):
+def question(message,
+            qmark="?",
+            default=True,
+            style=None,
+            **kwargs):
+
+    merged_style = merge_styles([DEFAULT_STYLE, style])
+
     default = kwargs.pop('default', '')
+    print(default)
     validate_prompt = kwargs.pop('validate', None)
     if validate_prompt:
         if inspect.isclass(validate_prompt) and issubclass(validate_prompt, Validator):
@@ -33,19 +51,29 @@ def question(message, **kwargs):
             kwargs['validator'] = _InputValidator()
 
     # TODO style defaults on detail level
-    kwargs['style'] = kwargs.pop('style', default_style)
-    qmark = kwargs.pop('qmark', '?')
+    kwargs['style'] = kwargs.pop('style', merged_style)
+    qmark = kwargs.pop('qmark', qmark)
 
 
-    def _get_prompt_tokens(cli):
-        return [
-            (Token.QuestionMark, qmark),
-            (Token.Question, ' %s  ' % message)
-        ]
+    def get_prompt_tokens():
+        tokens = []
 
-    return create_prompt_application(
-        get_prompt_tokens=_get_prompt_tokens,
-        lexer=SimpleLexer(Token.Answer),
-        default=default,
+        tokens.append(("class:qmark", qmark))
+        tokens.append(("class:question", ' {} '.format(message)))
+        tokens.append(("class:answer", default))
+        
+
+        return tokens
+
+    # bindings = KeyBindings()
+
+    # @bindings.add(Keys.ControlQ, eager=True)
+    # @bindings.add(Keys.ControlC, eager=True)
+    # def _(event):
+    #     raise KeyboardInterrupt()
+
+    return PromptSession(get_prompt_tokens,
+        # key_bindings=bindings,
+        # style=merged_style,
         **kwargs
-    )
+    ).app

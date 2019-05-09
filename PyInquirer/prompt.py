@@ -87,9 +87,9 @@ def prompt(questions, answers=None,
                         raise ValueError("Problem processing 'filter' of {} "
                                          "question: {}".format(name, e))
                 answers[name] = answer
-        except AttributeError as e:
-            print(e)
-            raise ValueError("No question type '{}'".format(_type))
+        # except AttributeError as e:
+        #     print(e)
+        #     raise ValueError("No question type '{}'".format(_type))
         except KeyboardInterrupt:
             print('')
             print(kbi_msg)

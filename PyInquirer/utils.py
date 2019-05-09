@@ -73,4 +73,4 @@ def required_arguments(func):
 
 def missing_arguments(func, argdict):
     """Return all arguments that are missing to call func."""
-    return set(required_arguments(func)) - argdict.keys()
+    return set(required_arguments(func)) - set(argdict.keys())

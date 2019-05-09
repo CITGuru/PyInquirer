@@ -2,16 +2,23 @@
 """
 `editor` type question
 """
-from __future__ import print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+import inspect
 import os
 import sys
-from prompt_toolkit.token import Token
-from prompt_toolkit.shortcuts import create_prompt_application
-from prompt_toolkit.validation import Validator, ValidationError
-from prompt_toolkit.layout.lexers import SimpleLexer
 
-from .common import default_style
+from prompt_toolkit import PromptSession
+from prompt_toolkit.application import Application
+from prompt_toolkit.key_binding import KeyBindings
+from prompt_toolkit.keys import Keys
+# from prompt_toolkit.layout.lexers import SimpleLexer
+from prompt_toolkit.layout import FormattedTextControl, Layout
+from prompt_toolkit.styles import merge_styles
+from prompt_toolkit.validation import ValidationError, Validator
 
+from PyInquirer.constants import DEFAULT_STYLE, NO, NO_OR_YES, YES, YES_OR_NO
 
 # use std prompt-toolkit control
 
@@ -131,7 +138,12 @@ def edit(text=None, editor=None, env=None, require_save=True,
         return editor.edit(text)
     editor.edit_file(filename)
 
-def question(message, **kwargs):
+def question(message, qmark="?",
+            default=True,
+            style=None,**kwargs):
+
+    merged_style = merge_styles([DEFAULT_STYLE, style])
+
     default = kwargs.pop('default', '')
     eargs = kwargs.pop('eargs', {})
     validate_prompt = kwargs.pop('validate', None)
@@ -179,19 +191,20 @@ def question(message, **kwargs):
             default = _text
 
     # TODO style defaults on detail level
-    kwargs['style'] = kwargs.pop('style', default_style)
-    qmark = kwargs.pop('qmark', '?')
+    kwargs['style'] = kwargs.pop('style', merged_style)
+    qmark = kwargs.pop('qmark', qmark)
     
-    def _get_prompt_tokens(cli):
-        return [
-            (Token.QuestionMark, qmark),
-            (Token.Question, ' %s  ' % message)
-        ]
+    def get_prompt_tokens(cli):
+        tokens = []
 
-    return create_prompt_application(
-        get_prompt_tokens=_get_prompt_tokens,
-        lexer=SimpleLexer(Token.Answer),
-        default=default,
+        tokens.append(("class:qmark", qmark))
+        tokens.append(("class:question", ' {} '.format(message)))
+        tokens.append(("class:answer", default))
+        
+
+        return tokens
+
+    return PromptSession(get_prompt_tokens,
         multiline=multiline,
         **kwargs
-    )
+    ).app

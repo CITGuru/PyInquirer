@@ -45,10 +45,10 @@ def question(message,
 
     bindings = KeyBindings()
 
-    @bindings.add(Keys.ControlQ, eager=True)
-    @bindings.add(Keys.ControlC, eager=True)
-    def _(event):
-        raise KeyboardInterrupt()
+    # @bindings.add(Keys.ControlQ, eager=True)
+    # @bindings.add(Keys.ControlC, eager=True)
+    # def _(event):
+    #     raise KeyboardInterrupt()
 
     @bindings.add('n')
     @bindings.add('N')
