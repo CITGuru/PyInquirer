@@ -3,6 +3,7 @@
 `editor` type question
 """
 from __future__ import print_function, unicode_literals
+import inspect
 import os
 import sys
 from prompt_toolkit.token import Token
@@ -136,7 +137,7 @@ def question(message, **kwargs):
     eargs = kwargs.pop('eargs', {})
     validate_prompt = kwargs.pop('validate', None)
     if validate_prompt:
-        if issubclass(validate_prompt, Validator):
+        if inspect.isclass(validate_prompt) and issubclass(validate_prompt, Validator):
             kwargs['validator'] = validate_prompt()
         elif callable(validate_prompt):
             class _InputValidator(Validator):
