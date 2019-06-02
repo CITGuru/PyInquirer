@@ -1,5 +1,14 @@
 PythonInquirer
 ==============
+.. image:: https://opencollective.com/pyinquirer/backers/badge.svg
+    :alt: Backers on Open Collective
+    :target: #backers
+
+.. image:: https://opencollective.com/pyinquirer/sponsors/badge.svg
+    :alt: Sponsors on Open Collective
+    :target: #sponsors
+
+
 
 A collection of common interactive command line user interfaces. It is
 originally called `whaaaaaat <https://github.com/finklabs/whaaaaat>`__
@@ -357,6 +366,42 @@ just fine
     $ pytest -sv tests/
 
 That's it, now you can fork a project and submit PR with your change!
+
+Credits
+
++++++++
+
+Contributors
+------------
+
+This project exists thanks to all the people who contribute! 
+
+.. image:: https://opencollective.com/pyinquirer/contributors.svg?width=890&button=false
+
+Backers
+-------
+
+Thank you to all our backers! `Become a backer`__.
+
+.. image:: https://opencollective.com/pyinquirer/backers.svg?width=890
+    :target: https://opencollective.com/pyinquirer#backers
+
+__ Backer_
+.. _Backer: https://opencollective.com/pyinquirer#backer
+
+Sponsors
+--------
+
+Support us by becoming a sponsor. Your logo will show up here with a link to your website. `Become a sponsor`__.
+
+.. image:: https://opencollective.com/pyinquirer/sponsor/0/avatar.svg
+
+    :target: https://opencollective.com/pyinquirer/sponsor/0/website
+
+__ Sponsor_
+.. _Sponsor: https://opencollective.com/pyinquirer#sponsor
+
+
 
 License
 -------
