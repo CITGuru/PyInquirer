@@ -69,6 +69,15 @@ class InquirerControl(FormattedTextControl):
         def append(index, choice):
             selected = (index == self.selected_option_index)
 
+            @if_mousedown
+            def select_item(cli, mouse_event):
+                # bind option with this index to mouse event
+                self.selected_option_index = index
+                self.answered = True
+                cli.set_return_value(self.get_selection()[1])
+
+            tokens.append((T.Pointer if selected else T, ' \u276f ' if selected
+            else '   '))
             if selected:
                 tokens.append(("class:pointer", ' \u276f '))
                 tokens.append(('[SetCursorPosition]', ''))

@@ -23,7 +23,13 @@ def prompt(questions, answers=None,
     if isinstance(questions, dict):
         questions = [questions]
 
-    answers = answers or {}
+    patch_stdout = kwargs.pop('patch_stdout', False)
+    return_asyncio_coroutine = kwargs.pop('return_asyncio_coroutine', False)
+    true_color = kwargs.pop('true_color', False)
+    refresh_interval = kwargs.pop('refresh_interval', 0)
+    eventloop = kwargs.pop('eventloop', None)
+    kbi_msg = kwargs.pop('keyboard_interrupt_msg', 'Cancelled by user')
+    raise_kbi = kwargs.pop('raise_keyboard_interrupt', False)
 
     for question in questions:
         # import the question
@@ -87,6 +93,7 @@ def prompt(questions, answers=None,
                         raise ValueError("Problem processing 'filter' of {} "
                                          "question: {}".format(name, e))
                 answers[name] = answer
+<<<<<<< HEAD
         # except AttributeError as e:
         #     print(e)
         #     raise ValueError("No question type '{}'".format(_type))
@@ -94,6 +101,18 @@ def prompt(questions, answers=None,
             print('')
             print(kbi_msg)
             print('')
+=======
+        except AttributeError as e:
+            print(e)
+            raise ValueError('No question type \'%s\'' % type)
+        except KeyboardInterrupt as exc:
+            if raise_kbi:
+                raise exc from None
+            if kbi_msg:
+                print('')
+                print(kbi_msg)
+                print('')
+>>>>>>> 31f4da76bbbf73585a14819aaabe9fe3432e721d
             return {}
     return answers
 
