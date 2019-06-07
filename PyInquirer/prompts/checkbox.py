@@ -23,8 +23,8 @@ from .common import setup_simple_validator, default_style, if_mousedown
 
 
 class InquirerControl(TokenListControl):
-    def __init__(self, choices, **kwargs):
-        self.pointer_index = 0
+    def __init__(self, choices, pointer_index, **kwargs):
+        self.pointer_index = pointer_index
         self.selected_options = []  # list of names
         self.answered = False
         self._init_choices(choices)
@@ -34,7 +34,7 @@ class InquirerControl(TokenListControl):
     def _init_choices(self, choices):
         # helper to convert from question format to internal format
         self.choices = []  # list (name, value)
-        searching_first_choice = True
+        searching_first_choice = True if self.pointer_index == 0 else False
         for i, c in enumerate(choices):
             if isinstance(c, Separator):
                 self.choices.append(c)
@@ -86,10 +86,10 @@ class InquirerControl(TokenListControl):
                         tokens.append((T.Selected, '\u25cf ', select_item))
                     else:
                         tokens.append((T, '\u25cb ', select_item))
-    
+
                     if pointed_at:
                         tokens.append((Token.SetCursorPosition, ''))
-    
+
                     tokens.append((T, line_name, select_item))
                 tokens.append((T, '\n'))
 
@@ -126,7 +126,8 @@ def question(message, **kwargs):
     # TODO style defaults on detail level
     style = kwargs.pop('style', default_style)
 
-    ic = InquirerControl(choices)
+    pointer_index = kwargs.pop('pointer_index', 0)
+    ic = InquirerControl(choices, pointer_index)
     qmark = kwargs.pop('qmark', '?')
 
     def get_prompt_tokens(cli):

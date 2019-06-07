@@ -129,7 +129,7 @@ feature:
 -  `checkbox.py <./examples/checkbox.py>`_
 -  `confirm.py <./examples/confirm.py>`_
 -  `hierarchical.py <./examples/hierarchical.py>`_
--  `pizza.py <./examples/pizza.py>`_ - demonstrate using different question types 
+-  `pizza.py <./examples/pizza.py>`_ - demonstrate using different question types
 -  `editor.py <./examples/editor.py>`_
 -  `input.py  <./examples/input.py>`_
 -  `rawlist.py <./examples/rawlist.py>`_
@@ -200,6 +200,8 @@ disabled choice, otherwise it'll default to ``"Disabled"``. The
 ``disabled`` property can also be a synchronous function receiving the
 current answers as argument and returning a boolean or a string.
 
+The ``pointer_index`` kwarg can be used to specify initial pointer position.
+
 .. figure:: https://raw.githubusercontent.com/citguru/PyInquirer/master/docs/images/checkbox-prompt.png
    :alt: Checkbox prompt
 
@@ -264,9 +266,9 @@ case a file is edited directly the return value is always ``None`` and
 
 Takes:
 
--  editor: accepts ``default`` to get the default platform editor. But 
+-  editor: accepts ``default`` to get the default platform editor. But
    you can also provide the path to an editor e.g ``vi``.
--  ext: the extension to tell the editor about. This defaults to `.txt` 
+-  ext: the extension to tell the editor about. This defaults to `.txt`
    but changing this might change syntax highlighting e.g ".py"
 -  save: accepts ``True`` or ``False`` to determine to save a file.
 -  filename: accepts the path of a file you'd like to edit.
@@ -374,7 +376,7 @@ Credits
 Contributors
 ------------
 
-This project exists thanks to all the people who contribute! 
+This project exists thanks to all the people who contribute!
 
 .. image:: https://opencollective.com/pyinquirer/contributors.svg?width=890&button=false
 
