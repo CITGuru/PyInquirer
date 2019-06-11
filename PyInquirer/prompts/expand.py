@@ -185,11 +185,12 @@ def question(message, **kwargs):
 
     @manager.registry.add_binding(Keys.Enter, eager=True)
     def set_answer(event):
-        if ic.get_selected_value() == '__HELP__':
+        selected_value = ic.get_selected_value()
+        if selected_value == '__HELP__':
             ic._help_active = True
         else:
             ic.answered = True
-            event.cli.set_return_value(ic.get_selected_value())
+            event.cli.set_return_value(selected_value)
 
     return Application(
         layout=layout,
