@@ -41,9 +41,9 @@ class InquirerControl(TokenListControl):
             else:
                 name = c['name']
                 value = c.get('value', name)
-                disabled = c.get('disabled', None)
-                if 'checked' in c and c['checked'] and not disabled:
-                    self.selected_options.append(c['name'])
+                disabled = c.get('disabled')
+                if c.get('checked') and not disabled:
+                    self.selected_options.append(value)
                 self.choices.append((name, value, disabled))
                 if searching_first_choice and not disabled:  # find the first (available) choice
                     self.pointer_index = i
