@@ -9,15 +9,13 @@ PythonInquirer
     :target: #sponsors
 
 
+**Github is starting to invite developers in from the GitHub Sponsors waitlist!**
 
-A collection of common interactive command line user interfaces. It is
-originally called `whaaaaaat <https://github.com/finklabs/whaaaaat>`__
-created by **finklabs**, but due to bad naming and in need of fixes, I
-decided to rename and apply some necessary fixes on it. The reason is
-because I needed it for a tool that can be install through PyPI. I need
-to rewrite it for my own need. But don't worry any new fix on the main
-Repo, will be added to it if needed. Lastly, I am currently working on
-the author's TODO.
+Your recommendations matter, so be sure to nominate `me and other contributors <https://github.com/CITGuru/PyInquirer/graphs/contributors>`__ of this project you'd like to see on GitHub Sponsors next by using the form in this link: http://github.co/2IHdeOw
+
+
+PyInquirer is a collection of common interactive command line user interfaces. 
+
 
 PyInquirer 1.0.3 Bugfix Update
 -----------------
@@ -56,7 +54,7 @@ to Python users.
 
 **PyInquirer** should ease the process of - providing *error
 feedback* - *asking questions* - *parsing* input - *validating* answers
-- managing *hierarchical prompts*
+- managing *hierarchical prompts
 
 **Note:** **PyInquirer** provides the user interface and the inquiry
 session flow. >
