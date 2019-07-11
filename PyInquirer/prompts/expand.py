@@ -44,8 +44,6 @@ class InquirerControl(TokenListControl):
 
         self.choices = []  # list (key, name, value)
 
-        if not default:
-            default = 'h'
         for i, c in enumerate(choices):
             if isinstance(c, Separator):
                 self.choices.append(c)
@@ -56,16 +54,19 @@ class InquirerControl(TokenListControl):
                     key = c.get('key')
                     name = c.get('name')
                     value = c.get('value', name)
-                    if default and default == key:
-                        self.pointer_index = i
-                        key = key.upper()  # default key is in uppercase
-                    self.choices.append((key, name, value))
+                    self.choices.append([key, name, value])
+
         # append the help choice
-        key = 'h'
-        if not default:
-            self.pointer_index = len(self.choices)
-            key = key.upper()  # default key is in uppercase
-        self.choices.append((key, 'Help, list all options', None))
+        self.choices.append(['h', 'Help, list all options', '__HELP__'])
+
+        # set the default
+        for i, choice in enumerate(self.choices):
+            if isinstance(choice, list):
+                key = choice[0]
+                default = default or "h"
+                if default == key:
+                    self.pointer_index = i
+                    choice[0] = key.upper()  # default key is in uppercase
 
     @property
     def choice_count(self):
@@ -184,8 +185,12 @@ def question(message, **kwargs):
 
     @manager.registry.add_binding(Keys.Enter, eager=True)
     def set_answer(event):
-        ic.answered = True
-        event.cli.set_return_value(ic.get_selected_value())
+        selected_value = ic.get_selected_value()
+        if selected_value == '__HELP__':
+            ic._help_active = True
+        else:
+            ic.answered = True
+            event.cli.set_return_value(selected_value)
 
     return Application(
         layout=layout,
