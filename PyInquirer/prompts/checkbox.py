@@ -42,9 +42,10 @@ class InquirerControl(TokenListControl):
                 name = c['name']
                 value = c.get('value', name)
                 disabled = c.get('disabled')
+                description = c.get('description', None)
                 if c.get('checked') and not disabled:
                     self.selected_options.append(value)
-                self.choices.append((name, value, disabled))
+                self.choices.append((name, value, disabled, description))
                 if searching_first_choice and not disabled:  # find the first (available) choice
                     self.pointer_index = i
                     searching_first_choice = False
@@ -90,7 +91,10 @@ class InquirerControl(TokenListControl):
                     if pointed_at:
                         tokens.append((Token.SetCursorPosition, ''))
 
-                    tokens.append((T, line_name, select_item))
+                    if choice[3]:  # description
+                        tokens.append((T, "%s - %s" % (line_name, choice[3])))
+                    else:
+                        tokens.append((T, line_name, select_item))
                 tokens.append((T, '\n'))
 
         # prepare the select choices
