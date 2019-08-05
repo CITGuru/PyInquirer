@@ -25,6 +25,9 @@ from .common import setup_simple_validator, default_style, if_mousedown
 class InquirerControl(TokenListControl):
     def __init__(self, choices, pointer_index, **kwargs):
         self.pointer_index = pointer_index
+        self.pointer_sign = kwargs.pop("pointer_sign", "\u276f")
+        self.selected_sign = kwargs.pop("selected_sign", "\u25cf")
+        self.unselected_sign = kwargs.pop("unselected_sign", "\u25cb")
         self.selected_options = []  # list of names
         self.answered = False
         self._init_choices(choices)
@@ -76,7 +79,7 @@ class InquirerControl(TokenListControl):
                         self.selected_options.append(line_value)
 
                 if pointed_at:
-                    tokens.append((T.Pointer, ' \u276f', select_item))  # ' >'
+                    tokens.append((T.Pointer, ' {}'.format(self.pointer_sign), select_item))  # ' >'
                 else:
                     tokens.append((T, '  ', select_item))
                 # 'o ' - FISHEYE
@@ -84,9 +87,9 @@ class InquirerControl(TokenListControl):
                     tokens.append((T, '- %s (%s)' % (choice[0], choice[2])))
                 else:
                     if selected:
-                        tokens.append((T.Selected, '\u25cf ', select_item))
+                        tokens.append((T.Selected, '{} '.format(self.selected_sign), select_item))
                     else:
-                        tokens.append((T, '\u25cb ', select_item))
+                        tokens.append((T, '{} '.format(self.unselected_sign), select_item))
 
                     if pointed_at:
                         tokens.append((Token.SetCursorPosition, ''))
@@ -131,7 +134,12 @@ def question(message, **kwargs):
     style = kwargs.pop('style', default_style)
 
     pointer_index = kwargs.pop('pointer_index', 0)
-    ic = InquirerControl(choices, pointer_index)
+    additional_parameters = dict()
+    additional_parameters.update({"pointer_sign": kwargs.pop('pointer_sign', '\u276f')})
+    additional_parameters.update({"selected_sign": kwargs.pop('selected_sign', '\u25cf')})
+    additional_parameters.update({"unselected_sign": kwargs.pop('unselected_sign', '\u25cb')})
+
+    ic = InquirerControl(choices, pointer_index, **additional_parameters)
     qmark = kwargs.pop('qmark', '?')
 
     def get_prompt_tokens(cli):
