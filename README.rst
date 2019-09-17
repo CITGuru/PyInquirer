@@ -406,8 +406,6 @@ __ Sponsor_
 License
 -------
 
-Since I am not the owner, it all goes to Finklab
-
 Copyright (c) 2016-2017 Mark Fink (twitter: @markfink)
 
 Copyright (c) 2018 Oyetoke Toby (twitter: @oyetokeT)
