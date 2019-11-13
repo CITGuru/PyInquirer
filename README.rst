@@ -252,7 +252,8 @@ Editor - ``{type: 'editor'}``
 Take ``type``, ``name``, ``message``\ [, ``default``, ``filter``,
 ``validate``, ``eargs``] properties
 
-### Editor Arguments - ``eargs``
+Editor Arguments - ``eargs``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Opens an empty or edits the default text in the defined editor.  If an editor is given
 (should be the full path to the executable but the regular operating
