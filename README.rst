@@ -8,6 +8,8 @@ PythonInquirer
     :alt: Sponsors on Open Collective
     :target: #sponsors
 
+.. image:: https://travis-ci.org/expobrain/PyInquirer.svg?branch=master
+    :target: https://travis-ci.org/expobrain/PyInquirer
 
 **Github is starting to invite developers in from the GitHub Sponsors waitlist!**
 
