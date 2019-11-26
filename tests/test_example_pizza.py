@@ -30,8 +30,9 @@ def test_pizza(example_app):
     example_app.writeline('2')
     example_app.expect(textwrap.dedent("""\
         ? How many do you need?  2
-        ? What about the toppings?  (pawh)
-        >> Pepperoni and cheese"""))
+        ? What about the toppings?  (pawH)
+        >> Help, list all options"""))
+    example_app.writeline('p')
     example_app.write(keys.ENTER)
     example_app.expect(textwrap.dedent("""\
         ? What about the toppings?  PepperoniCheese
@@ -48,14 +49,11 @@ def test_pizza(example_app):
     example_app.expect(textwrap.dedent("""\
         ? Any comments on your purchase experience?  Nope, all good!
         Order receipt:
-        {
-            "beverage": "Pepsi",
-            "comments": "Nope, all good!",
-            "phone": "1111111111",
-            "quantity": 2,
-            "size": "large",
-            "toBeDelivered": false,
-            "toppings": "PepperoniCheese"
-        }
-        
-        """))
+        {'beverage': 'Pepsi',
+         'comments': 'Nope, all good!',
+         'phone': '1111111111',
+         'quantity': 2,
+         'size': 'large',
+         'toBeDelivered': False,
+         'toppings': 'PepperoniCheese'}
+    """))

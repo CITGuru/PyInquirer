@@ -35,9 +35,8 @@ def test_rawlist(example_app):
     example_app.write(keys.ENTER)
     example_app.expect(textwrap.dedent("""\
         ? What size do you need  Large
-        {
-            "size": "large",
-            "theme": "Order a pizza"
-        }
-        
+        ('{\\n'
+         '    \\x1b[94m"size"\\x1b[39;49;00m: \\x1b[33m"large"\\x1b[39;49;00m,\\n'
+         '    \\x1b[94m"theme"\\x1b[39;49;00m: \\x1b[33m"Order a pizza"\\x1b[39;49;00m\\n'
+         '}\\n')
         """))

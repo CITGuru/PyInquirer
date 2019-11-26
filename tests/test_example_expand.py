@@ -15,15 +15,12 @@ def test_without_expand(example_app):
         >> Overwrite this one and all next"""))
     example_app.write('x')
     example_app.expect(textwrap.dedent("""\
-        
+
         Abot                          """))  # only registers changed chars :)
     example_app.write(keys.ENTER)
     example_app.expect(textwrap.dedent("""\
         ? Conflict on `file.js`:   abort
-        {
-            "overwrite": "abort"
-        }
-
+        '{\\n    \\x1b[94m"overwrite"\\x1b[39;49;00m: \\x1b[33m"abort"\\x1b[39;49;00m\\n}\\n'
         """))
 
 
@@ -45,8 +42,5 @@ def test_with_expand(example_app):
     example_app.write(keys.ENTER)
     example_app.expect(textwrap.dedent("""\
         ? Conflict on `file.js`:   diff
-        {
-            "overwrite": "diff"
-        }
-
+        '{\\n    \\x1b[94m"overwrite"\\x1b[39;49;00m: \\x1b[33m"diff"\\x1b[39;49;00m\\n}\\n'
         """))

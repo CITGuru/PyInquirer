@@ -256,6 +256,10 @@ def create_example_fixture(example):
         # it takes some time to collect the coverage data
         # if the main process exits too early the coverage data is not available
         time.sleep(p.delayafterterminate)
-        p.sendintr()  # in case the subprocess was not ended by the test
+        try:
+            p.sendintr()  # in case the subprocess was not ended by the test
+        except OSError as e:
+            if e.errno != 5:
+                raise
         p.wait()  # without wait() the coverage info never arrives
     return example_app
