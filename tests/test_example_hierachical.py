@@ -52,8 +52,8 @@ def test_hierarchical(example_app):
         ? Which direction would you like to go?  Forward
         You find a painted wooden sign that says:
          ____  _____  ____  _____
-        (_  _)(  _  )(  _ \(  _  )
+        (_  _)(  _  )(  _ \\(  _  )
           )(   )(_)(  )(_) ))(_)(
          (__) (_____)(____/(_____)
-        
+
         """))
