@@ -40,7 +40,7 @@ class InquirerControl(TokenListControl):
         self.selected_option_index = 0
         self.answered = False
         self.choices = choices
-        self._init_choices(choices)
+        self._init_choices(choices, kwargs.pop('default'))
         super(InquirerControl, self).__init__(self._get_choice_tokens,
                                               **kwargs)
 
@@ -59,6 +59,9 @@ class InquirerControl(TokenListControl):
                     value = c.get('value', name)
                     disabled = c.get('disabled', None)
                     self.choices.append((name, value, disabled))
+                    if value == default:
+                        self.selected_option_index = i
+                        searching_first_choice = False
                 if searching_first_choice:
                     self.selected_option_index = i  # found the first choice
                     searching_first_choice = False
@@ -118,7 +121,7 @@ def question(message, **kwargs):
     # TODO style defaults on detail level
     style = kwargs.pop('style', default_style)
 
-    ic = InquirerControl(choices)
+    ic = InquirerControl(choices, default=default)
 
     def get_prompt_tokens(cli):
         tokens = []
