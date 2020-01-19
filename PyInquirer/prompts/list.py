@@ -84,21 +84,24 @@ class InquirerControl(TokenListControl):
                 self.answered = True
                 cli.set_return_value(self.get_selection()[1])
 
-            tokens.append((T.Pointer if selected else T, ' \u276f ' if selected
-            else '   '))
-            if selected:
-                tokens.append((Token.SetCursorPosition, ''))
-            if choice[2]:  # disabled
-                tokens.append((T.Selected if selected else T,
-                               '- %s (%s)' % (choice[0], choice[2])))
+            if isinstance(choice[0], Separator):
+                tokens.append((T.Separator, '  %s\n' % choice[0]))
             else:
-                try:
-                    tokens.append((T.Selected if selected else T, str(choice[0]),
-                                select_item))
-                except:
-                    tokens.append((T.Selected if selected else T, choice[0],
-                                select_item))
-            tokens.append((T, '\n'))
+                tokens.append((T.Pointer if selected else T, ' \u276f ' if selected
+                else '   '))
+                if selected:
+                    tokens.append((Token.SetCursorPosition, ''))
+                if choice[2]:  # disabled
+                    tokens.append((T.Selected if selected else T,
+                                   '- %s (%s)' % (choice[0], choice[2])))
+                else:
+                    try:
+                        tokens.append((T.Selected if selected else T, str(choice[0]),
+                                    select_item))
+                    except:
+                        tokens.append((T.Selected if selected else T, choice[0],
+                                    select_item))
+                tokens.append((T, '\n'))
 
         # prepare the select choices
         for i, choice in enumerate(self.choices):
