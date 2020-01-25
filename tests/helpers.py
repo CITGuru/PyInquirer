@@ -181,7 +181,7 @@ class SimplePty(PtyProcess):
         :param echo: default is False so we do not have to deal with the echo
         :param preexec_fn:
         :param dimensions:
-        :param skip_cr: skip charriage return '/r' characters when comparing equality
+        :param skip_cr: skip carriage return '/r' characters when comparing equality
         :param skip_ansi: skip ansi escape sequences when comparing equality
         :param timeout: read timeout in seconds
         :return: subprocess handle
