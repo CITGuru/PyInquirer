@@ -14,8 +14,5 @@ def test_password(example_app):
     example_app.writeline('asdf')
     example_app.expect(textwrap.dedent("""\
         ? Enter your git password  ****
-        {
-            "password": "asdf"
-        }
-        
+        '{\\n    \\x1b[94m"password"\\x1b[39;49;00m: \\x1b[33m"asdf"\\x1b[39;49;00m\\n}\\n'
         """))

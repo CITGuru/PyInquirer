@@ -1,0 +1,20 @@
+language: python
+
+cache: pip
+
+python:
+  - 3.6
+  - 3.7
+  - 3.8
+
+before_install:
+  # Strangely enough numpy is already installed on Travis's VMs
+  - pip uninstall -y numpy
+  - pip install -r requirements_dev.txt
+
+install:
+  - pip install -e .
+
+script:
+  - pytest -xvv tests
+  - safety check

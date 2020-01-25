@@ -10,7 +10,7 @@ example_app = create_example_fixture('examples/checkbox.py')
 
 def test_checkbox(example_app):
     example_app.expect(textwrap.dedent("""\
-        ? Select toppings  (<up>, <down> to move, <space> to select, <a> to toggle, <i>
+        😃 Select toppings  (<up>, <down> to move, <space> to select, <a> to toggle, <i>
           = The Meats =
          ❯○ Ham
           ○ Ground Meat
@@ -31,12 +31,6 @@ def test_checkbox(example_app):
     example_app.expect('\n\n● ')
     example_app.write(keys.ENTER)
     example_app.expect(textwrap.dedent("""\
-        ? Select toppings  done (2 selections)
-        {
-            "toppings": [
-                "Ham",
-                "Mozzarella"
-            ]
-        }
-
+        😃 Select toppings  done (2 selections)
+        {'toppings': ['Ham', 'Mozzarella']}
         """))

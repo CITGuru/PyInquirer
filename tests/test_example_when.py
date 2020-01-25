@@ -19,11 +19,10 @@ def test_when_bacon(example_app):
     example_app.writeline('smoked bacon')
     example_app.expect(textwrap.dedent("""\
         ? Bacon lover, what is your favorite type of bacon?  smoked bacon
-        {
-            "bacon": true,
-            "favorite": "smoked bacon"
-        }
-        
+        ('{\\n'
+         '    \\x1b[94m"bacon"\\x1b[39;49;00m: \\x1b[34mtrue\\x1b[39;49;00m,\\n'
+         '    \\x1b[94m"favorite"\\x1b[39;49;00m: \\x1b[33m"smoked bacon"\\x1b[39;49;00m\\n'
+         '}\\n')
         """))
 
 
@@ -43,12 +42,11 @@ def test_when_pizza(example_app):
 
     example_app.expect(textwrap.dedent("""\
         ? Whew! What is your favorite type of pizza?  Toscana
-        {
-            "bacon": false,
-            "favorite": "Toscana",
-            "pizza": true
-        }
-        
+        ('{\\n'
+         '    \\x1b[94m"bacon"\\x1b[39;49;00m: \\x1b[34mfalse\\x1b[39;49;00m,\\n'
+         '    \\x1b[94m"favorite"\\x1b[39;49;00m: \\x1b[33m"Toscana"\\x1b[39;49;00m,\\n'
+         '    \\x1b[94m"pizza"\\x1b[39;49;00m: \\x1b[34mtrue\\x1b[39;49;00m\\n'
+         '}\\n')
         """))
 
 
@@ -63,9 +61,8 @@ def test_when_no_thanks(example_app):
 
     example_app.expect(textwrap.dedent("""\
         ? Ok... Do you like pizza?  No
-        {
-            "bacon": false,
-            "pizza": false
-        }
-        
+        ('{\\n'
+         '    \\x1b[94m"bacon"\\x1b[39;49;00m: \\x1b[34mfalse\\x1b[39;49;00m,\\n'
+         '    \\x1b[94m"pizza"\\x1b[39;49;00m: \\x1b[34mfalse\\x1b[39;49;00m\\n'
+         '}\\n')
         """))

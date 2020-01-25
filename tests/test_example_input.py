@@ -23,10 +23,5 @@ def test_input(example_app):
     example_app.writeline('0123456789')
     example_app.expect(textwrap.dedent("""\
         ? What's your phone number  0123456789
-        {
-            "first_name": "John",
-            "last_name": "Doe",
-            "phone": "0123456789"
-        }
-        
+        {'first_name': 'John', 'last_name': 'Doe', 'phone': '0123456789'}
         """))
