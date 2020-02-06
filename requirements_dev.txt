@@ -11,6 +11,7 @@ pytest-html>=1.10.1
 pytest-xdist>=1.15.0
 pylint>=1.6.5
 ptyprocess==0.5.1
+regex>=2016.11.21
 
 # build-tools
 pep8>=1.7.0
