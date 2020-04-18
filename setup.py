@@ -4,11 +4,6 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-# long description from the README file
-
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
-    long_description = f.read()
-
 # get the dependencies
 with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f:
     all_reqs = f.read().split('\n')
@@ -25,7 +20,6 @@ setup(
           'A Python module for collection of common interactive command line user interfaces,'
           ' based on Inquirer.js'
     ),
-    long_description=long_description,
     license='MIT',
     url='https://github.com/CITGuru/PyInquirer/',
     classifiers=[
