@@ -4,8 +4,6 @@ import json
 import sys
 from pprint import pprint
 
-from pygments import highlight, lexers, formatters
-
 __version__ = '0.1.2'
 
 PY3 = sys.version_info[0] >= 3
@@ -16,16 +14,20 @@ def format_json(data):
 
 
 def colorize_json(data):
-    if PY3:
-        if isinstance(data, bytes):
-            data = data.decode('UTF-8')
-    else:
-        if not isinstance(data, unicode):
-            data = unicode(data, 'UTF-8')
-    colorful_json = highlight(data,
-                              lexers.JsonLexer(),
-                              formatters.TerminalFormatter())
-    return colorful_json
+    try:
+        from pygments import highlight, lexers, formatters
+        if PY3:
+            if isinstance(data, bytes):
+                data = data.decode('UTF-8')
+        else:
+            if not isinstance(data, unicode):
+                data = unicode(data, 'UTF-8')
+        colorful_json = highlight(data,
+                                  lexers.JsonLexer(),
+                                  formatters.TerminalFormatter())
+        return colorful_json
+    except ModuleNotFoundError:
+        return data
 
 
 def print_json(data):
