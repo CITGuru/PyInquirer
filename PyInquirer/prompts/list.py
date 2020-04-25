@@ -127,11 +127,7 @@ def question(message, **kwargs):
     # TODO style defaults on detail level
     style = kwargs.pop('style', default_style)
 
-<<<<<<< HEAD
     ic = InquirerControl(choices, default=default)
-=======
-    ic = InquirerControl(choices, default)
->>>>>>> 909c172ba07a6d4f62d19faf13cfe99e10488c06
 
     def get_prompt_tokens(cli):
         tokens = []
