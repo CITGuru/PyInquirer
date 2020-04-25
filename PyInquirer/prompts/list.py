@@ -36,15 +36,15 @@ if PY3:
 
 
 class InquirerControl(TokenListControl):
-    def __init__(self, choices, **kwargs):
+    def __init__(self, choices, default, **kwargs):
         self.selected_option_index = 0
         self.answered = False
         self.choices = choices
-        self._init_choices(choices, kwargs.pop('default'))
+        self._init_choices(choices, default)
         super(InquirerControl, self).__init__(self._get_choice_tokens,
                                               **kwargs)
 
-    def _init_choices(self, choices, default=None):
+    def _init_choices(self, choices, default):
         # helper to convert from question format to internal format
         self.choices = []  # list (name, value, disabled)
         searching_first_choice = True
@@ -64,6 +64,9 @@ class InquirerControl(TokenListControl):
                         searching_first_choice = False
                 if searching_first_choice:
                     self.selected_option_index = i  # found the first choice
+                    searching_first_choice = False
+                if default and (default == i or default == c):
+                    self.selected_option_index = i  # default choice exists
                     searching_first_choice = False
 
     @property
@@ -116,12 +119,16 @@ def question(message, **kwargs):
         raise PromptParameterException('choices')
 
     choices = kwargs.pop('choices', None)
-    default = kwargs.pop('default', 0)  # TODO
+    default = kwargs.pop('default', None)
     qmark = kwargs.pop('qmark', '?')
     # TODO style defaults on detail level
     style = kwargs.pop('style', default_style)
 
+<<<<<<< HEAD
     ic = InquirerControl(choices, default=default)
+=======
+    ic = InquirerControl(choices, default)
+>>>>>>> 909c172ba07a6d4f62d19faf13cfe99e10488c06
 
     def get_prompt_tokens(cli):
         tokens = []
