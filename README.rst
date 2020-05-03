@@ -130,7 +130,6 @@ feature:
 -  `confirm.py <./examples/confirm.py>`_
 -  `hierarchical.py <./examples/hierarchical.py>`_
 -  `pizza.py <./examples/pizza.py>`_ - demonstrate using different question types
--  `editor.py <./examples/editor.py>`_
 -  `input.py  <./examples/input.py>`_
 -  `rawlist.py <./examples/rawlist.py>`_
 
