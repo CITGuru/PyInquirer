@@ -189,10 +189,9 @@ Checkbox - ``{type: 'checkbox'}``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Take ``type``, ``name``, ``message``, ``choices``\ [, ``filter``,
-``validate``, ``default``] properties. ``default`` is expected to be an
-Array of the checked choices value.
+``validate``] properties.
 
-Choices marked as ``{checked: true}`` will be checked by default.
+Choices marked as ``{'checked': True}`` will be checked by default.
 
 Choices whose property ``disabled`` is truthy will be unselectable. If
 ``disabled`` is a string, then the string will be outputted next to the
