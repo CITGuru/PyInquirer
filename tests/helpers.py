@@ -19,8 +19,9 @@ from prompt_toolkit.eventloop.posix import PosixEventLoop
 from prompt_toolkit.input import PipeInput
 from prompt_toolkit.interface import CommandLineInterface
 from prompt_toolkit.output import DummyOutput
+from prompt_toolkit.styles import style_from_dict
+from prompt_toolkit.token import Token
 
-from PyInquirer import style_from_dict, Token
 from PyInquirer import prompts
 
 
