@@ -1,5 +1,6 @@
-from PyInquirer import style_from_dict, Token
-
+from prompt_toolkit.styles import style_from_dict
+from prompt_toolkit.token import Token
+from prompt_toolkit.validation import Validator, ValidationError
 
 custom_style_1 = style_from_dict({
     Token.Separator: '#cc5454',
