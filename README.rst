@@ -67,7 +67,7 @@ Documentation
 Installation
 ~~~~~~~~~~~~
 
-Like most Python packages PyInquirer is available on `PyPi <TODO>`__.
+Like most Python packages PyInquirer is available on `PyPi <https://pypi.org/project/PyInquirer/>`__.
 Simply use pip to install the PyInquirer package
 
 .. code:: shell
