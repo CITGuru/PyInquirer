@@ -67,7 +67,7 @@ Documentation
 Installation
 ~~~~~~~~~~~~
 
-Like most Python packages PyInquirer is available on `PyPi <https://pypi.org/project/PyInquirer/>`__.
+Like most Python packages PyInquirer is available on `PyPi <TODO>`__.
 Simply use pip to install the PyInquirer package
 
 .. code:: shell
@@ -130,6 +130,7 @@ feature:
 -  `confirm.py <./examples/confirm.py>`_
 -  `hierarchical.py <./examples/hierarchical.py>`_
 -  `pizza.py <./examples/pizza.py>`_ - demonstrate using different question types
+-  `editor.py <./examples/editor.py>`_
 -  `input.py  <./examples/input.py>`_
 -  `rawlist.py <./examples/rawlist.py>`_
 

@@ -8,9 +8,8 @@ from __future__ import print_function, unicode_literals
 import regex
 from pprint import pprint
 
-from prompt_toolkit.validation import Validator, ValidationError
-
-from PyInquirer import prompt
+from PyInquirer import style_from_dict, Token, prompt
+from PyInquirer import Validator, ValidationError
 
 from examples import custom_style_3
 

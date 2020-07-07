@@ -4,13 +4,11 @@ from __future__ import absolute_import, print_function
 
 from prompt_toolkit.shortcuts import run_application
 
-from .prompts import list, confirm, input, password, checkbox, rawlist, expand, editor, \
-    PromptParameterException
+from . import PromptParameterException, prompts
+from .prompts import list, confirm, input, password, checkbox, rawlist, expand, editor
 
 
 def prompt(questions, answers=None, **kwargs):
-    from . import prompts
-
     if isinstance(questions, dict):
         questions = [questions]
     answers = answers or {}
@@ -39,7 +37,7 @@ def prompt(questions, answers=None, **kwargs):
             _kwargs = {}
             _kwargs.update(kwargs)
             _kwargs.update(question)
-            type_ = _kwargs.pop('type')
+            type = _kwargs.pop('type')
             name = _kwargs.pop('name')
             message = _kwargs.pop('message')
             when = _kwargs.pop('when', None)
@@ -66,8 +64,8 @@ def prompt(questions, answers=None, **kwargs):
 
             if callable(question.get('default')):
                 _kwargs['default'] = question['default'](answers)
-
-            application = getattr(prompts, type_).question(message, **_kwargs)
+            
+            application = getattr(prompts, type).question(message, **_kwargs)
 
             answer = run_application(
                 application,
@@ -88,7 +86,7 @@ def prompt(questions, answers=None, **kwargs):
                 answers[name] = answer
         except AttributeError as e:
             print(e)
-            raise ValueError('No question type \'%s\'' % type_)
+            raise ValueError('No question type \'%s\'' % type)
         except KeyboardInterrupt as exc:
             if raise_kbi:
                 raise exc from None

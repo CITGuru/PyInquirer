@@ -16,7 +16,7 @@ from prompt_toolkit.layout.containers import ConditionalContainer, HSplit
 from prompt_toolkit.layout.dimension import LayoutDimension as D
 from prompt_toolkit.token import Token
 
-from . import PromptParameterException
+from .. import PromptParameterException
 from ..separator import Separator
 from .common import default_style
 from .common import if_mousedown
