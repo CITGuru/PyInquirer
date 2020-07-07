@@ -67,7 +67,7 @@ Documentation
 Installation
 ~~~~~~~~~~~~
 
-Like most Python packages PyInquirer is available on `PyPi <TODO>`__.
+Like most Python packages PyInquirer is available on `PyPi <https://pypi.org/project/PyInquirer/>`__.
 Simply use pip to install the PyInquirer package
 
 .. code:: shell
@@ -130,7 +130,6 @@ feature:
 -  `confirm.py <./examples/confirm.py>`_
 -  `hierarchical.py <./examples/hierarchical.py>`_
 -  `pizza.py <./examples/pizza.py>`_ - demonstrate using different question types
--  `editor.py <./examples/editor.py>`_
 -  `input.py  <./examples/input.py>`_
 -  `rawlist.py <./examples/rawlist.py>`_
 
@@ -189,10 +188,9 @@ Checkbox - ``{type: 'checkbox'}``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Take ``type``, ``name``, ``message``, ``choices``\ [, ``filter``,
-``validate``, ``default``] properties. ``default`` is expected to be an
-Array of the checked choices value.
+``validate``] properties.
 
-Choices marked as ``{checked: true}`` will be checked by default.
+Choices marked as ``{'checked': True}`` will be checked by default.
 
 Choices whose property ``disabled`` is truthy will be unselectable. If
 ``disabled`` is a string, then the string will be outputted next to the

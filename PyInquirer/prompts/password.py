@@ -2,8 +2,6 @@
 """
 `password` type question
 """
-from __future__ import print_function, unicode_literals
-
 from . import input 
 
 # use std prompt-toolkit control

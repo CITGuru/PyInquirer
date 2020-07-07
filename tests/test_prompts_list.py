@@ -11,7 +11,7 @@ def test_select_first_choice():
     }
     text = keys.ENTER
 
-    result, cli = feed_app_with_input('list', message, text, **kwargs)
+    result = feed_app_with_input('list', message, text, **kwargs)
     assert result == 'foo'
 
 
@@ -23,7 +23,7 @@ def test_select_second_choice():
     }
     text = keys.DOWN + keys.ENTER
 
-    result, cli = feed_app_with_input('list', message, text, **kwargs)
+    result = feed_app_with_input('list', message, text, **kwargs)
     assert result == 'bar'
 
 
@@ -35,7 +35,7 @@ def test_select_third_choice():
     }
     text = keys.DOWN + keys.DOWN + keys.ENTER
 
-    result, cli = feed_app_with_input('list', message, text, **kwargs)
+    result = feed_app_with_input('list', message, text, **kwargs)
     assert result == 'bazz'
 
 
@@ -47,7 +47,7 @@ def test_cycle_to_first_choice():
     }
     text = keys.DOWN + keys.DOWN + keys.DOWN + keys.ENTER
 
-    result, cli = feed_app_with_input('list', message, text, **kwargs)
+    result = feed_app_with_input('list', message, text, **kwargs)
     assert result == 'foo'
 
 
@@ -59,7 +59,7 @@ def test_cycle_backwards():
     }
     text = keys.UP + keys.ENTER
 
-    result, cli = feed_app_with_input('list', message, text, **kwargs)
+    result = feed_app_with_input('list', message, text, **kwargs)
     assert result == 'bazz'
 
 

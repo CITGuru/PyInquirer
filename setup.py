@@ -4,11 +4,6 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-# long description from the README file
-
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
-    long_description = f.read()
-
 # get the dependencies
 with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f:
     all_reqs = f.read().split('\n')
@@ -16,7 +11,7 @@ with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f:
 install_requires = [x.strip() for x in all_reqs if ('git+' not in x) and (
     not x.startswith('#')) and (not x.startswith('-'))]
 dependency_links = [x.strip().replace('git+', '') for x in all_reqs \
-                    if 'git+' not in x]
+                    if 'git+' in x]
 
 setup(
     name='PyInquirer',
@@ -25,9 +20,9 @@ setup(
           'A Python module for collection of common interactive command line user interfaces,'
           ' based on Inquirer.js'
     ),
-    long_description=long_description,
     license='MIT',
     url='https://github.com/CITGuru/PyInquirer/',
+    python_requires=">=3.6.1",
     classifiers=[
         'Development Status :: 1 - Planning',
         'Natural Language :: English',

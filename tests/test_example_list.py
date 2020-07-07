@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function, unicode_literals
 import textwrap
 
 from .helpers import keys
@@ -14,7 +13,7 @@ def test_list(example_app):
         ? What do you want to do?  (Use arrow keys)
          ❯ Order a pizza
            Make a reservation
-           ---------------
+          ---------------
            Ask for opening hours
            - Contact support (Unavailable at this time)
            Talk to the receptionist"""))

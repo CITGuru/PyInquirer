@@ -2,8 +2,6 @@
 """
 hierarchical prompt usage example
 """
-from __future__ import print_function, unicode_literals
-
 from PyInquirer import style_from_dict, Token, prompt
 
 from examples import custom_style_2

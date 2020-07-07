@@ -3,8 +3,6 @@
 * Confirm question example
 * run example by typing `python example/confirm.py` in your console
 """
-from __future__ import print_function
-
 from pprint import pprint
 
 from PyInquirer import prompt
