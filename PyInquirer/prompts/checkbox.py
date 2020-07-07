@@ -9,9 +9,11 @@ from prompt_toolkit.layout.controls import FormattedTextControl
 from prompt_toolkit.layout.containers import ConditionalContainer, \
     ScrollOffsets, HSplit, Window, WindowAlign
 from prompt_toolkit.layout.dimension import LayoutDimension as D
+
 from prompt_toolkit.layout import Layout
 
-from .. import PromptParameterException
+
+from . import PromptParameterException
 from ..separator import Separator
 from .common import setup_simple_validator, default_style, if_mousedown
 
@@ -27,6 +29,8 @@ class InquirerControl(FormattedTextControl):
         self.unselected_sign = kwargs.pop("unselected_sign", "\u25cb")
         self.selected_options = []  # list of names
         self.answered = False
+        self.answered_correctly = True
+        self.error_message = None
         self._init_choices(choices)
         super().__init__(self._get_choice_tokens, **kwargs)
 
@@ -155,6 +159,8 @@ def question(message, **kwargs):
             tokens.append(('class:instruction',
                            ' (<up>, <down> to move, <space> to select, <a> '
                            'to toggle, <i> to invert)'))
+            if not ic.answered_correctly:
+                tokens.append((Token.Error, ' Error: %s' % ic.error_message))
         return tokens
 
     # assemble layout

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from contextlib import contextmanager
 from . import PromptParameterException, prompts
 from .prompts import list, confirm, input, password, checkbox, rawlist, expand, editor
@@ -7,7 +8,10 @@ from prompt_toolkit.shortcuts import PromptSession
 from prompt_toolkit.application import Application
 
 
+
 def prompt(questions, answers=None, **kwargs):
+    from . import prompts
+
     if isinstance(questions, dict):
         questions = [questions]
     answers = answers or {}
@@ -35,7 +39,7 @@ def prompt(questions, answers=None, **kwargs):
             _kwargs = {}
             _kwargs.update(kwargs)
             _kwargs.update(question)
-            type = _kwargs.pop('type')
+            type_ = _kwargs.pop('type')
             name = _kwargs.pop('name')
             message = _kwargs.pop('message')
             when = _kwargs.pop('when', None)
@@ -90,7 +94,7 @@ def prompt(questions, answers=None, **kwargs):
                 answers[name] = answer
         except AttributeError as e:
             print(e)
-            raise ValueError('No question type \'%s\'' % type)
+            raise ValueError('No question type \'%s\'' % type_)
         except KeyboardInterrupt as exc:
             if raise_kbi:
                 raise exc from None

@@ -10,7 +10,7 @@ from prompt_toolkit.layout.controls import FormattedTextControl
 from prompt_toolkit.layout.containers import ConditionalContainer, HSplit
 from prompt_toolkit.layout.dimension import LayoutDimension as D
 
-from .. import PromptParameterException
+from . import PromptParameterException
 from ..separator import Separator
 from .common import default_style
 from .common import if_mousedown

@@ -14,11 +14,12 @@ import regex
 
 from prompt_toolkit.input.posix_pipe import PosixPipeInput
 from prompt_toolkit.output import DummyOutput
+
 from prompt_toolkit.application.current import create_app_session
 from prompt_toolkit.application import Application
 from prompt_toolkit.shortcuts.prompt import PromptSession
 
-from PyInquirer import style_from_dict, Token
+
 from PyInquirer import prompts
 
 
