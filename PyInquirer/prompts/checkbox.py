@@ -13,6 +13,8 @@ from prompt_toolkit.layout.containers import ConditionalContainer, \
     ScrollOffsets, HSplit
 from prompt_toolkit.layout.dimension import LayoutDimension as D
 from prompt_toolkit.token import Token
+from prompt_toolkit.validation import ValidationError
+
 
 from .. import PromptParameterException
 from ..separator import Separator
@@ -30,6 +32,8 @@ class InquirerControl(TokenListControl):
         self.unselected_sign = kwargs.pop("unselected_sign", "\u25cb")
         self.selected_options = []  # list of names
         self.answered = False
+        self.answered_correctly = True
+        self.error_message = None
         self._init_choices(choices)
         super(InquirerControl, self).__init__(self._get_choice_tokens,
                                               **kwargs)
@@ -160,6 +164,8 @@ def question(message, **kwargs):
             tokens.append((Token.Instruction,
                            ' (<up>, <down> to move, <space> to select, <a> '
                            'to toggle, <i> to invert)'))
+            if not ic.answered_correctly:
+                tokens.append((Token.Error, ' Error: %s' % ic.error_message))
         return tokens
 
     # assemble layout
@@ -234,9 +240,14 @@ def question(message, **kwargs):
 
     @manager.registry.add_binding(Keys.Enter, eager=True)
     def set_answer(event):
-        ic.answered = True
-        # TODO use validator
-        event.cli.set_return_value(ic.get_selected_values())
+        try:
+            validator(ic.get_selected_values())
+            ic.answered = True
+            event.cli.set_return_value(ic.get_selected_values())
+        except ValidationError as e:
+            ic.error_message = e
+            ic.answered_correctly = False
+            event.cli.reset()
 
     return Application(
         layout=layout,
