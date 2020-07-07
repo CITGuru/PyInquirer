@@ -16,7 +16,7 @@ from prompt_toolkit.token import Token
 from prompt_toolkit.validation import ValidationError
 
 
-from .. import PromptParameterException
+from . import PromptParameterException
 from ..separator import Separator
 from .common import setup_simple_validator, default_style, if_mousedown
 

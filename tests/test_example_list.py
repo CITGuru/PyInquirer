@@ -14,7 +14,7 @@ def test_list(example_app):
         ? What do you want to do?  (Use arrow keys)
          ❯ Order a pizza
            Make a reservation
-           ---------------
+          ---------------
            Ask for opening hours
            - Contact support (Unavailable at this time)
            Talk to the receptionist"""))
