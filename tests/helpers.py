@@ -41,7 +41,8 @@ keys = Bunch(
     ENTER='\x0a',  # ControlJ  (Identical to '\n')
     ESCAPE='\x1b',
     CONTROLC='\x03',
-    BACK='\x7f')
+    BACK='\x7f'
+)
 
 
 style = style_from_dict({
