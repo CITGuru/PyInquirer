@@ -28,6 +28,7 @@ setup(
     long_description=long_description,
     license='MIT',
     url='https://github.com/CITGuru/PyInquirer/',
+    python_requires=">=3.6.1",
     classifiers=[
         'Development Status :: 1 - Planning',
         'Natural Language :: English',

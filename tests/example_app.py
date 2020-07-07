@@ -2,7 +2,6 @@
 """
 example app to test running an app as subprocess within pty
 """
-from __future__ import print_function, unicode_literals
 import sys, time
 
 

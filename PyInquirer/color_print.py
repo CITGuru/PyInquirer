@@ -2,21 +2,17 @@
 """
 provide colorized output
 """
-from __future__ import print_function, unicode_literals
 import sys
-from prompt_toolkit.shortcuts import print_tokens, style_from_dict, Token
+from prompt_toolkit.shortcuts import print_tokens
 
 
 def _print_token_factory(col):
     """Internal helper to provide color names."""
     def _helper(msg):
-        style = style_from_dict({
-            Token.Color: col,
-        })
         tokens = [
-            (Token.Color, msg)
+            ('fg:' + col, msg)
         ]
-        print_tokens(tokens, style=style)
+        print_tokens(tokens)
 
     def _helper_no_terminal(msg):
         # workaround if we have no terminal

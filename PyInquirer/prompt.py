@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import absolute_import, print_function
+from contextlib import contextmanager
+from . import PromptParameterException, prompts
+from .prompts import list, confirm, input, password, checkbox, rawlist, expand, editor
+from prompt_toolkit.patch_stdout import patch_stdout as pt_patch_stdout
+from prompt_toolkit.shortcuts import PromptSession
+from prompt_toolkit.application import Application
 
-from prompt_toolkit.shortcuts import run_application
-
-from .prompts import list, confirm, input, password, checkbox, rawlist, expand, editor, \
-    PromptParameterException
 
 
 def prompt(questions, answers=None, **kwargs):
@@ -19,7 +20,6 @@ def prompt(questions, answers=None, **kwargs):
     return_asyncio_coroutine = kwargs.pop('return_asyncio_coroutine', False)
     true_color = kwargs.pop('true_color', False)
     refresh_interval = kwargs.pop('refresh_interval', 0)
-    eventloop = kwargs.pop('eventloop', None)
     kbi_msg = kwargs.pop('keyboard_interrupt_msg', 'Cancelled by user')
     raise_kbi = kwargs.pop('raise_keyboard_interrupt', False)
 
@@ -67,15 +67,21 @@ def prompt(questions, answers=None, **kwargs):
             if callable(question.get('default')):
                 _kwargs['default'] = question['default'](answers)
 
-            application = getattr(prompts, type_).question(message, **_kwargs)
+            with pt_patch_stdout() if patch_stdout else _dummy_context_manager():
+                result = getattr(prompts, type).question(message, **_kwargs)
 
-            answer = run_application(
-                application,
-                patch_stdout=patch_stdout,
-                return_asyncio_coroutine=return_asyncio_coroutine,
-                true_color=true_color,
-                refresh_interval=refresh_interval,
-                eventloop=eventloop)
+                if isinstance(result, PromptSession):
+                    answer = result.prompt()
+                elif isinstance(result, Application):
+                    answer = result.run()
+                else:
+                    assert isinstance(answer, str)
+                    answer = result
+
+                #answer = application.run(
+                #    return_asyncio_coroutine=return_asyncio_coroutine,
+                #    true_color=true_color,
+                #    refresh_interval=refresh_interval)
 
             if answer is not None:
                 if filter:
@@ -99,6 +105,9 @@ def prompt(questions, answers=None, **kwargs):
             return {}
     return answers
 
+@contextmanager
+def _dummy_context_manager():
+    yield
 
 # TODO:
 # Bottom Bar - inquirer.ui.BottomBar

@@ -3,8 +3,6 @@
 * Checkbox question example
 * run example by typing `python example/checkbox.py` in your console
 """
-from __future__ import print_function, unicode_literals
-
 from pprint import pprint
 
 from PyInquirer import prompt, Separator

@@ -2,12 +2,10 @@
 """
 `input` type question
 """
-from __future__ import print_function, unicode_literals
 import inspect
-from prompt_toolkit.token import Token
-from prompt_toolkit.shortcuts import create_prompt_application
+from prompt_toolkit.shortcuts import prompt
 from prompt_toolkit.validation import Validator, ValidationError
-from prompt_toolkit.layout.lexers import SimpleLexer
+from prompt_toolkit.lexers import SimpleLexer
 
 from .common import default_style
 
@@ -37,15 +35,15 @@ def question(message, **kwargs):
     qmark = kwargs.pop('qmark', '?')
 
 
-    def _get_prompt_tokens(cli):
+    def _get_prompt_tokens():
         return [
-            (Token.QuestionMark, qmark),
-            (Token.Question, ' %s  ' % message)
+            ('class:questionmark', qmark),
+            ('class:question', ' %s  ' % message)
         ]
 
-    return create_prompt_application(
-        get_prompt_tokens=_get_prompt_tokens,
-        lexer=SimpleLexer(Token.Answer),
+    return prompt(
+        message=_get_prompt_tokens,
+        lexer=SimpleLexer('class:answer'),
         default=default,
         **kwargs
     )

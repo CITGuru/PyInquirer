@@ -3,9 +3,8 @@
 * example for expand question type
 * run example by typing `python example/checkbox.py` in your console
 """
-from __future__ import print_function, unicode_literals
+from PyInquirer import style_from_dict, Token, prompt, print_json, Separator
 
-from PyInquirer import prompt, print_json, Separator
 
 from examples import custom_style_2
 
