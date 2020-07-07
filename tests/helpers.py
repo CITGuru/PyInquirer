@@ -2,9 +2,6 @@
 """
 Common test functionality
 """
-
-from __future__ import print_function
-
 import os
 import sys
 import codecs
@@ -15,10 +12,11 @@ import pytest
 from ptyprocess import PtyProcess
 import regex
 
-from prompt_toolkit.eventloop.posix import PosixEventLoop
-from prompt_toolkit.input import PipeInput
-from prompt_toolkit.interface import CommandLineInterface
+from prompt_toolkit.input.posix_pipe import PosixPipeInput
 from prompt_toolkit.output import DummyOutput
+from prompt_toolkit.application.current import create_app_session
+from prompt_toolkit.application import Application
+from prompt_toolkit.shortcuts.prompt import PromptSession
 
 from PyInquirer import style_from_dict, Token
 from PyInquirer import prompts
@@ -38,7 +36,7 @@ keys = Bunch(
     UP='\x1b[A',
     LEFT='\x1b[D',
     RIGHT='\x1b[C',
-    ENTER='\x0a',  # ControlJ  (Identical to '\n')
+    ENTER='\x0d',  # ControlM  (Identical to '\r')
     ESCAPE='\x1b',
     CONTROLC='\x03',
     BACK='\x7f')
@@ -55,30 +53,29 @@ style = style_from_dict({
 
 def feed_app_with_input(type, message, text, **kwargs):
     """
-    Create a CommandLineInterface, feed it with the given user input and return
+    Create an application, feed it with the given user input and return
     the CLI object.
 
     This returns a (result, CLI) tuple.
     note: this only works if you import your prompt and then this function!!
     """
     # If the given text doesn't end with a newline, the interface won't finish.
-    assert text.endswith('\n')
+    assert text.endswith('\r')
 
-    application = getattr(prompts, type).question(message, **kwargs)
+    inp = PosixPipeInput(text)
 
-    loop = PosixEventLoop()
     try:
-        inp = PipeInput()
-        inp.send_text(text)
-        cli = CommandLineInterface(
-            application=application,
-            eventloop=loop,
-            input=inp,
-            output=DummyOutput())
-        result = cli.run()
-        return result, cli
+        with create_app_session(input=inp, output=DummyOutput()) as session:
+            application = getattr(prompts, type).question(message, **kwargs)
+            #print(application.input)
+            #breakpoint()
+
+            if isinstance(application, Application):
+                result = application.run()
+            elif isinstance(application, PromptSession):
+                result = application.prompt()
+            return result
     finally:
-        loop.close()
         inp.close()
 
 
