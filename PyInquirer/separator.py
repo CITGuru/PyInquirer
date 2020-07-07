@@ -4,7 +4,7 @@ Used to space/separate choices group
 """
 
 
-class Separator(object):
+class Separator:
     line = '-' * 15
 
     def __init__(self, line=None):

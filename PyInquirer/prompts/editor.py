@@ -2,14 +2,12 @@
 """
 `editor` type question
 """
-from __future__ import print_function, unicode_literals
 import inspect
 import os
 import sys
-from prompt_toolkit.token import Token
-from prompt_toolkit.shortcuts import create_prompt_application
+from prompt_toolkit.shortcuts import PromptSession
 from prompt_toolkit.validation import Validator, ValidationError
-from prompt_toolkit.layout.lexers import SimpleLexer
+from prompt_toolkit.lexers import SimpleLexer
 
 from .common import default_style
 
@@ -21,7 +19,7 @@ WIN = sys.platform.startswith('win')
 class EditorArgumentsError(Exception):
     pass
 
-class Editor(object):
+class Editor:
 
     def __init__(self, editor=None, env=None, require_save=True, extension='.txt'):
         self.editor = editor
@@ -183,15 +181,15 @@ def question(message, **kwargs):
     kwargs['style'] = kwargs.pop('style', default_style)
     qmark = kwargs.pop('qmark', '?')
     
-    def _get_prompt_tokens(cli):
+    def _get_prompt_tokens():
         return [
-            (Token.QuestionMark, qmark),
-            (Token.Question, ' %s  ' % message)
+            ('class:questionmark', qmark),
+            ('class:question', ' %s  ' % message)
         ]
 
-    return create_prompt_application(
-        get_prompt_tokens=_get_prompt_tokens,
-        lexer=SimpleLexer(Token.Answer),
+    return PromptSession(
+        message=_get_prompt_tokens,
+        lexer=SimpleLexer('class:answer'),
         default=default,
         multiline=multiline,
         **kwargs
