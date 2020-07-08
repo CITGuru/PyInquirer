@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 * example for rawlist question type
-* run example by typing `python example/checkbox.py` in your console
+* run example by typing `python example/rawlist.py` in your console
 """
 from __future__ import print_function, unicode_literals
 
