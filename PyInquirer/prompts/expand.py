@@ -167,7 +167,7 @@ def question(message, **kwargs):
     @kb.add('H', eager=True)
     @kb.add('h', eager=True)
     def help_choice(event):
-        ic._help_active = True
+        ic._help_active = not ic._help_active
 
     @kb.add('enter', eager=True)
     def set_answer(event):
