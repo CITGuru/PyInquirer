@@ -20,7 +20,7 @@ from prompt_toolkit.application import Application
 from prompt_toolkit.shortcuts.prompt import PromptSession
 
 
-from PyInquirer import prompts
+from PyInquirer import prompts, style_from_dict
 
 
 # http://code.activestate.com/recipes/52308-the-simple-but-handy-collector-of-a-bunch-of-named/?in=user-97991
@@ -45,11 +45,11 @@ keys = Bunch(
 
 
 style = style_from_dict({
-    Token.QuestionMark: '#FF9D00 bold',
-    Token.Selected: '#5F819D bold',
-    Token.Instruction: '',  # default
-    Token.Answer: '#5F819D bold',
-    Token.Question: '',
+    "questionmark": '#FF9D00 bold',
+    "selected": '#5F819D bold',
+    "instruction": '',  # default
+    "answer": '#5F819D bold',
+    "question": '',
 })
 
 

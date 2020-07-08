@@ -68,17 +68,18 @@ def prompt(questions, answers=None, **kwargs):
                 _kwargs['default'] = question['default'](answers)
 
             with pt_patch_stdout() if patch_stdout else _dummy_context_manager():
-                result = getattr(prompts, type).question(message, **_kwargs)
+                result = getattr(prompts, type_).question(message, **_kwargs)
+
 
                 if isinstance(result, PromptSession):
                     answer = result.prompt()
                 elif isinstance(result, Application):
                     answer = result.run()
                 else:
-                    assert isinstance(answer, str)
+                    # assert isinstance(answer, str)
                     answer = result
 
-                #answer = application.run(
+                # answer = application.run(
                 #    return_asyncio_coroutine=return_asyncio_coroutine,
                 #    true_color=true_color,
                 #    refresh_interval=refresh_interval)

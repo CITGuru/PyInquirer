@@ -140,6 +140,7 @@ def question(message, **kwargs):
         elif callable(validate_prompt):
             class _InputValidator(Validator):
                 def validate(self, document):
+                    # print(document)
                     verdict = validate_prompt(document.text)
                     if not verdict == True:
                         if verdict == False:
@@ -190,7 +191,8 @@ def question(message, **kwargs):
     return PromptSession(
         message=_get_prompt_tokens,
         lexer=SimpleLexer('class:answer'),
-        default=default,
         multiline=multiline,
+        enable_open_in_editor=True,
+        vi_mode=True,
         **kwargs
     )

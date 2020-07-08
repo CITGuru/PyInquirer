@@ -32,5 +32,5 @@ questions = [
     }
 ]
 
-answers = prompt(questions, style=custom_style_2)
+answers = prompt.prompt(questions, style=custom_style_2)
 print_json(answers)

@@ -407,8 +407,6 @@ __ Sponsor_
 License
 -------
 
-Copyright (c) 2016-2017 Mark Fink (twitter: @markfink)
-
 Copyright (c) 2018 Oyetoke Toby (twitter: @oyetokeT)
 
 Licensed under the MIT license.

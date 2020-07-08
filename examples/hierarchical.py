@@ -2,7 +2,7 @@
 """
 hierarchical prompt usage example
 """
-from PyInquirer import style_from_dict, Token, prompt
+from PyInquirer import style_from_dict, prompt
 
 from examples import custom_style_2
 
@@ -14,7 +14,7 @@ def ask_direction():
         'message': 'Which direction would you like to go?',
         'choices': ['Forward', 'Right', 'Left', 'Back']
     }
-    answers = prompt(directions_prompt)
+    answers = prompt.prompt(directions_prompt)
     return answers['direction']
 
 # TODO better to use while loop than recursion!
@@ -67,7 +67,7 @@ def encounter2a():
 
 
 def encounter2b():
-    prompt({
+    prompt.prompt({
         'type': 'list',
         'name': 'weapon',
         'message': 'Pick one',

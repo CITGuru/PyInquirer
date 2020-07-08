@@ -25,6 +25,6 @@ questions = [
     },
 ]
 
-answers = prompt(questions, style=custom_style_1)
+answers = prompt.prompt(questions, style=custom_style_1)
 pprint(answers)
 

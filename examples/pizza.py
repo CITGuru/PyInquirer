@@ -106,6 +106,6 @@ questions = [
     }
 ]
 
-answers = prompt(questions, style=custom_style_3)
+answers = prompt.prompt(questions, style=custom_style_3)
 print('Order receipt:')
 pprint(answers)
