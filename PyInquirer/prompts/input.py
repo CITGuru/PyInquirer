@@ -33,17 +33,26 @@ def question(message, **kwargs):
     # TODO style defaults on detail level
     kwargs['style'] = kwargs.pop('style', default_style)
     qmark = kwargs.pop('qmark', '?')
+    kwargs.setdefault('lexer', SimpleLexer('class:answer'))
 
 
     def _get_prompt_tokens():
-        return [
+        result = [
             ('class:questionmark', qmark),
             ('class:question', ' %s  ' % message)
         ]
+        if kwargs.get('multiline'):
+            result += [
+                ('class:instruction', 'Multiline; finish with '),
+                ('class:instruction reverse', 'Esc, ↵'),
+                ('class:instruction', ' or '),
+                ('class:instruction reverse', 'Alt+Enter'),
+                ('class:questionmark', '\n> '),
+            ]
+        return result
 
     return prompt(
         message=_get_prompt_tokens,
-        lexer=SimpleLexer('class:answer'),
         default=default,
         **kwargs
     )
