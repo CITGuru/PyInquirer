@@ -18,7 +18,7 @@ from prompt_toolkit.layout.containers import ConditionalContainer, HSplit, Windo
 from prompt_toolkit.layout.dimension import LayoutDimension as D
 import string
 from typing import Generic, List, Optional, TypeVar
-
+from ..separator import Separator
 from .common import default_style
 
 
@@ -66,7 +66,9 @@ class ChoicesControl(UIControl):
 
         for choice in self._choices:
             if self._search_string:
-                if isinstance(choice, str):
+                if isinstance(choice, Separator):
+                    self._cached_choices.append(choice)
+                elif isinstance(choice, str):
                     if self._search_string in choice.lower():
                         self._cached_choices.append(choice)
                 else:    
@@ -88,6 +90,8 @@ class ChoicesControl(UIControl):
                 self._selected_index = 0
                 if isinstance(self._selected_choice, str):
                     pass
+                elif isinstance(self._selected_choice, Separator):
+                    self.select_next_choice()
                 else:
                     while self._selected_choice.get('disabled', False):
                         self.select_next_choice()
@@ -109,9 +113,12 @@ class ChoicesControl(UIControl):
         _next()
         if isinstance(self._selected_choice, str):
             pass
+        elif isinstance(self._selected_choice, Separator):
+            _next()
         else:
-            while self._selected_choice.get('disabled', False):
+            while isinstance(self._selected_choice, dict) and self._selected_choice.get('disabled', False):
                 _next()
+                
 
     def select_previous_choice(self) -> None:
         if not self._cached_choices or self._selected_choice is None:
@@ -124,8 +131,10 @@ class ChoicesControl(UIControl):
         _prev()
         if isinstance(self._selected_choice, str):
             pass
+        elif isinstance(self._selected_choice, Separator):
+            _prev()
         else:
-            while self._selected_choice.get('disabled', False):
+            while isinstance(self._selected_choice, dict) and self._selected_choice.get('disabled', False):
                 _prev()
 
     def preferred_width(self, max_available_width: int) -> int:
@@ -148,21 +157,23 @@ class ChoicesControl(UIControl):
             tokens = []
 
             selected = (choice == self.get_selection())
-            tokens.append(('class:pointer' if selected else '', ' \u276f ' if selected
-                else '   '))
-            if selected:
-                tokens.append(('[SetCursorPosition]', ''))
-
-            if isinstance(choice, str):
-                tokens.append(('class:selected' if selected else '', str(choice)))
+            if isinstance(choice, Separator):
+                tokens.append(('class:separator', '  %s\n' % choice))
             else:
-                if choice.get('disabled', False):
-                    token_text = choice.get('name', choice)
-                    if choice.get('disabled_reason', False):
-                        token_text += f' ({choice.get("disabled_reason")})'
-                    tokens.append(('class:selected' if selected else 'class:disabled', token_text))
+                tokens.append(('class:pointer' if selected else '', ' \u276f ' if selected
+                    else '   '))
+                if selected:
+                    tokens.append(('[SetCursorPosition]', ''))
+                if isinstance(choice, str):
+                    tokens.append(('class:selected' if selected else '', str(choice)))
                 else:
-                    tokens.append(('class:selected' if selected else '', str(choice.get('name', choice))))
+                    if choice.get('disabled', False):
+                        token_text = choice.get('name')
+                        if isinstance(choice.get('disabled'), str):
+                            token_text += f' ({choice.get("disabled")})'
+                        tokens.append(('class:selected' if selected else 'class:disabled', token_text))
+                    else:
+                        tokens.append(('class:selected' if selected else '', str(choice.get('name', choice))))
 
             return tokens
 

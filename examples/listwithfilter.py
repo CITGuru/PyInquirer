@@ -21,7 +21,7 @@ def get_delivery_options(answers):
 
 questions = [
     {
-        'type': 'list',
+        'type': 'listwithfilter',
         'name': 'theme',
         'message': 'What do you want to do?',
         'choices': [
@@ -37,14 +37,14 @@ questions = [
         ]
     },
     {
-        'type': 'list',
+        'type': 'listwithfilter',
         'name': 'size',
         'message': 'What size do you need?',
         'choices': ['Jumbo', 'Large', 'Standard', 'Medium', 'Small', 'Micro'],
         'filter': lambda val: val.lower()
     },
     {
-        'type': 'list',
+        'type': 'listwithfilter',
         'name': 'delivery',
         'message': 'Which vehicle you want to use for delivery?',
         'choices': get_delivery_options,
