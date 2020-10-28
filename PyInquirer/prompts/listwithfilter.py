@@ -71,7 +71,7 @@ class ChoicesControl(UIControl):
                 elif isinstance(choice, str):
                     if self._search_string.lower() in choice.lower():
                         self._cached_choices.append(choice)
-                else:    
+                else:
                     if self._search_string.lower() in choice.get('name').lower():
                         self._cached_choices.append(choice)
             else:
