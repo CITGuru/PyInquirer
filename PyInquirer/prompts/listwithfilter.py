@@ -254,7 +254,7 @@ def question(message, **kwargs):
             else:
                 tokens.append(('class:answer', ' ' + choices_control.get_selection().get('name')))
         else:
-            tokens.append(('class:instruction', ' (Use arrow keys)'))
+            tokens.append(('class:instruction', ' (Use arrow keys or type to filter)'))
         return tokens
 
     @Condition
