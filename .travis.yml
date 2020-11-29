@@ -1,3 +1,7 @@
+os: linux
+
+dist: focal
+
 language: python
 
 cache: pip
@@ -6,10 +10,9 @@ python:
   - 3.6
   - 3.7
   - 3.8
+  - 3.9
 
 before_install:
-  # Strangely enough numpy is already installed on Travis's VMs
-  - pip uninstall -y numpy
   - pip install -r requirements_dev.txt
 
 install:
