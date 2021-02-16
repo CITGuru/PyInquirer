@@ -27,11 +27,9 @@ def _print_token_factory(col):
 yellow = _print_token_factory('#dfaf00')
 blue = _print_token_factory('#0087ff')
 gray = _print_token_factory('#6c6c6c')
-
-# TODO
-#black
-#red
-#green
-#magenta
-#cyan
-#white
+black = _print_token_factory('#000000')
+red = _print_token_factory('#ff0000')
+green = _print_token_factory('#00ff00')
+magenta = _print_token_factory('#ff00ff')
+cyan = _print_token_factory('#00ffff')
+white = _print_token_factory('#ffffff')
