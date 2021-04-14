@@ -11,6 +11,8 @@ PythonInquirer
 .. image:: https://travis-ci.org/expobrain/PyInquirer.svg?branch=master
     :target: https://travis-ci.org/expobrain/PyInquirer
 
+
+**Update: We are looking for a successor/maintainance. Here: <https://github.com/CITGuru/PyInquirer/issues/159>**
 **Github is starting to invite developers in from the GitHub Sponsors waitlist!**
 
 Your recommendations matter, so be sure to nominate `me and other contributors <https://github.com/CITGuru/PyInquirer/graphs/contributors>`__ of this project you'd like to see on GitHub Sponsors next by using the form in this link: http://github.co/2IHdeOw
