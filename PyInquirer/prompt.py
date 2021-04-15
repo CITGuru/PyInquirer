@@ -8,7 +8,6 @@ from prompt_toolkit.shortcuts import PromptSession
 from prompt_toolkit.application import Application
 
 
-
 def prompt(questions, answers=None, **kwargs):
     from . import prompts
 
@@ -36,6 +35,10 @@ def prompt(questions, answers=None, **kwargs):
             if choices is not None and callable(choices):
                 question['choices'] = choices(answers)
 
+            message = question.get('message')
+            if message is not None and callable(message):
+                question['message'] = message(answers)
+
             _kwargs = {}
             _kwargs.update(kwargs)
             _kwargs.update(question)
@@ -56,12 +59,12 @@ def prompt(questions, answers=None, **kwargs):
                             'Problem in \'when\' check of %s question: %s' %
                             (name, e))
                 else:
-                    raise ValueError('\'when\' needs to be function that ' \
+                    raise ValueError('\'when\' needs to be function that '
                                      'accepts a dict argument')
             if filter:
                 # at least a little sanity check!
                 if not callable(question['filter']):
-                    raise ValueError('\'filter\' needs to be function that ' \
+                    raise ValueError('\'filter\' needs to be function that '
                                      'accepts an argument')
 
             if callable(question.get('default')):
@@ -69,7 +72,6 @@ def prompt(questions, answers=None, **kwargs):
 
             with pt_patch_stdout() if patch_stdout else _dummy_context_manager():
                 result = getattr(prompts, type_).question(message, **_kwargs)
-
 
                 if isinstance(result, PromptSession):
                     answer = result.prompt()
@@ -105,6 +107,7 @@ def prompt(questions, answers=None, **kwargs):
                 print('')
             return {}
     return answers
+
 
 @contextmanager
 def _dummy_context_manager():
