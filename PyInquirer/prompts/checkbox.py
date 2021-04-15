@@ -157,7 +157,7 @@ def question(message, **kwargs):
                                ' done (%d selections)' % nbr_selected))
         else:
             tokens.append(('class:instruction',
-                           ' (<up>, <down> to move, <space> to select, <a> '
+                           ' (<up,k>, <down,j> to move, <space> to select, <a> '
                            'to toggle, <i> to invert)'))
             if not ic.answered_correctly:
                 tokens.append((Token.Error, ' Error: %s' % ic.error_message))
@@ -217,6 +217,7 @@ def question(message, **kwargs):
             ic.selected_options = []
 
     @kb.add('down', eager=True)
+    @kb.add('j', eager=True)
     def move_cursor_down(event):
         def _next():
             ic.pointer_index = ((ic.pointer_index + 1) % ic.line_count)
@@ -226,6 +227,7 @@ def question(message, **kwargs):
             _next()
 
     @kb.add('up', eager=True)
+    @kb.add('k', eager=True)
     def move_cursor_up(event):
         def _prev():
             ic.pointer_index = ((ic.pointer_index - 1) % ic.line_count)
