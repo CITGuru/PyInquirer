@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 * example for expand question type
-* run example by typing `python example/checkbox.py` in your console
+* run example by typing `python example/expand.py` in your console
 """
 from PyInquirer import style_from_dict, Token, prompt, print_json, Separator
 
@@ -41,5 +41,5 @@ questions = [
     }
 ]
 
-answers = prompt.prompt(questions, style=custom_style_2)
+answers = prompt(questions, style=custom_style_2)
 print_json(answers)
