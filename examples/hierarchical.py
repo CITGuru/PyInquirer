@@ -67,7 +67,7 @@ def encounter2a():
 
 
 def encounter2b():
-    prompt.prompt({
+    prompt({
         'type': 'list',
         'name': 'weapon',
         'message': 'Pick one',
