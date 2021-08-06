@@ -21,7 +21,7 @@ setup(
           'A Python module for collection of common interactive command line user interfaces,'
           ' based on Inquirer.js'
     ),
-    long_description=(pathlib.Path(__file__).parent / "README.md").read_text(),
+    long_description=(pathlib.Path(__file__).parent / "docs/README.md").read_text(),
     long_description_content_type="text/markdown",
     license='MIT',
     url='https://github.com/CITGuru/PyInquirer/',
