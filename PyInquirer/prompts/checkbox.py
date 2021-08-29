@@ -9,6 +9,7 @@ from prompt_toolkit.layout.controls import FormattedTextControl
 from prompt_toolkit.layout.containers import ConditionalContainer, \
     ScrollOffsets, HSplit, Window, WindowAlign
 from prompt_toolkit.layout.dimension import LayoutDimension as D
+from prompt_toolkit.validation import ValidationError
 
 from prompt_toolkit.layout import Layout
 
@@ -160,7 +161,7 @@ def question(message, **kwargs):
                            ' (<up>, <down> to move, <space> to select, <a> '
                            'to toggle, <i> to invert)'))
             if not ic.answered_correctly:
-                tokens.append((Token.Error, ' Error: %s' % ic.error_message))
+                tokens.append(('class:Answer', ' Error: %s' % ic.error_message))
         return tokens
 
     # assemble layout
@@ -236,9 +237,13 @@ def question(message, **kwargs):
 
     @kb.add('enter', eager=True)
     def set_answer(event):
-        ic.answered = True
-        # TODO use validator
-        event.app.exit(result=ic.get_selected_values())
+        try:
+            validator(ic.get_selected_values())
+            ic.answered = True
+            event.app.exit(result=ic.get_selected_values())
+        except ValidationError as error:
+            ic.error_message = error
+            ic.answered_correctly = False
 
     return Application(
         layout=Layout(layout),
