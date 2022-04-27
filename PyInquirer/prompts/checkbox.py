@@ -24,7 +24,7 @@ from .common import setup_simple_validator, default_style, if_mousedown
 class InquirerControl(FormattedTextControl):
     def __init__(self, choices, pointer_index, **kwargs):
         self.pointer_index = pointer_index
-        self.pointer_sign = kwargs.pop("pointer_sign", "\u276f")
+        self.pointer_sign = kwargs.pop("pointer_sign", ">")
         self.selected_sign = kwargs.pop("selected_sign", "\u25cf")
         self.unselected_sign = kwargs.pop("unselected_sign", "\u25cb")
         self.selected_options = []  # list of names
@@ -78,9 +78,9 @@ class InquirerControl(FormattedTextControl):
                         self.selected_options.append(line_value)
 
                 if pointed_at:
-                    tokens.append(('class:pointer', ' {}'.format(self.pointer_sign), select_item))  # ' >'
+                    tokens.append(('class:pointer', ' {} '.format(self.pointer_sign), select_item))  # ' > '
                 else:
-                    tokens.append(('', '  ', select_item))
+                    tokens.append(('', '   ', select_item))
                 # 'o ' - FISHEYE
                 if choice[2]:  # disabled
                     tokens.append(('', '- %s (%s)' % (choice[0], choice[2])))
@@ -134,7 +134,7 @@ def question(message, **kwargs):
 
     pointer_index = kwargs.pop('pointer_index', 0)
     additional_parameters = dict()
-    additional_parameters.update({"pointer_sign": kwargs.pop('pointer_sign', '\u276f')})
+    additional_parameters.update({"pointer_sign": kwargs.pop('pointer_sign', '>')})
     additional_parameters.update({"selected_sign": kwargs.pop('selected_sign', '\u25cf')})
     additional_parameters.update({"unselected_sign": kwargs.pop('unselected_sign', '\u25cb')})
 
@@ -157,8 +157,8 @@ def question(message, **kwargs):
                                ' done (%d selections)' % nbr_selected))
         else:
             tokens.append(('class:instruction',
-                           ' (<up>, <down> to move, <space> to select, <a> '
-                           'to toggle, <i> to invert)'))
+                           ' (<hoch>, <runter> zum Bewegen, <space> zum Auswählen, <a> '
+                           'zum Togglen, <i> zum Invert)'))
             if not ic.answered_correctly:
                 tokens.append((Token.Error, ' Error: %s' % ic.error_message))
         return tokens
@@ -243,6 +243,6 @@ def question(message, **kwargs):
     return Application(
         layout=Layout(layout),
         key_bindings=kb,
-        mouse_support=True,
+        mouse_support=False,
         style=style
     )

@@ -75,7 +75,7 @@ class InquirerControl(FormattedTextControl):
             if isinstance(choice[0], Separator):
                 tokens.append(('class:separator', '  %s\n' % choice[0]))
             else:
-                tokens.append(('class:pointer' if selected else '', ' \u276f ' if selected
+                tokens.append(('class:pointer' if selected else '', ' > ' if selected
                 else '   '))
                 if selected:
                     tokens.append(('[SetCursorPosition]', ''))
@@ -122,7 +122,7 @@ def question(message, **kwargs):
         if ic.answered:
             tokens.append(('class:answer', ' ' + ic.get_selection()[0]))
         else:
-            tokens.append(('class:instruction', ' (Use arrow keys)'))
+            tokens.append(('class:instruction', ' (Pfeiltasten nutzen, Enter bestätigen)'))
         return tokens
 
     # assemble layout
@@ -173,6 +173,6 @@ def question(message, **kwargs):
     return Application(
         layout=Layout(layout),
         key_bindings=kb,
-        mouse_support=True,
+        mouse_support=False,
         style=style
     )
