@@ -1,16 +1,20 @@
 # -*- coding: utf-8 -*-
 
+import termios, sys
 from contextlib import contextmanager
 from . import PromptParameterException, prompts
 from .prompts import list, confirm, input, password, checkbox, rawlist, expand, editor
 from prompt_toolkit.patch_stdout import patch_stdout as pt_patch_stdout
 from prompt_toolkit.shortcuts import PromptSession
-from prompt_toolkit.application import Application
+from prompt_toolkit.application import Application, get_app
 
 
 
 def prompt(questions, answers=None, **kwargs):
     from . import prompts
+
+    # Save the terminal settings
+    old_attrs = termios.tcgetattr(sys.stdin)
 
     if isinstance(questions, dict):
         questions = [questions]
@@ -97,6 +101,10 @@ def prompt(questions, answers=None, **kwargs):
             print(e)
             raise ValueError('No question type \'%s\'' % type_)
         except KeyboardInterrupt as exc:
+            # Resets to normal terminal
+            termios.tcsetattr(sys.stdin, termios.TCSANOW, old_attrs)
+            get_app().reset()
+            
             if raise_kbi:
                 raise exc from None
             if kbi_msg:
