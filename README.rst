@@ -35,15 +35,17 @@ Table of Contents
    1. `Installation <#installation>`__
    2. `Examples <#examples>`__
    3. `Quickstart <#quickstart>`__
-   4. `Question Types <#types>`__
-   5. `Question Properties <#properties>`__
-   6. `User Interfaces and Styles <#styles>`__
+   4. `Question Types <#question-types>`__
+   5. `Question Properties <#question-properties>`__
+   6. `User Interfaces and Styles <#user-interfaces-and-styles>`__
 
-2. `Windows Platform <#windows>`__
+2. `Windows Platform <#windows-platform>`__
 3. `Support <#support>`__
 4. `Contribution <#contribution>`__
-5. `Acknowledgments <#acknowledgements>`__
-6. `License <#license>`__
+5. `Contributors <#contributors>`__
+6. `Backers <#backers>`__
+7. `Sponsors <#sponsors>`__
+8. `License <#license>`__
 
 Goal and Philosophy
 -------------------
