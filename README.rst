@@ -144,6 +144,8 @@ Question Types
 
 ``questions`` is a list of questions. Each question has a type.
 
+--------------
+
 List - ``{type: 'list'}``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -151,7 +153,9 @@ Take ``type``, ``name``, ``message``, ``choices``\ [, ``default``,
 ``filter``] properties. (Note that default must be the choice ``index``
 in the array or a choice ``value``)
 
-|List prompt| s ---
+|List prompt|
+
+--------------
 
 Raw List - ``{type: 'rawlist'}``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
