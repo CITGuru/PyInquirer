@@ -45,6 +45,16 @@ questions = [
     },
     {
         'type': 'listwithfilter',
+        'name': 'cook_level',
+        'message': 'How well done do you want it?',
+        'choices': [
+            {'name': 'Crispy', 'value': 'crispy'},
+            {'name': 'Normal', 'value': 'normal'},
+            {'name': 'Soft', 'value': 'soft'}],
+        'default': 'crispy'
+    },
+    {
+        'type': 'listwithfilter',
         'name': 'delivery',
         'message': 'Which vehicle you want to use for delivery?',
         'choices': get_delivery_options,
