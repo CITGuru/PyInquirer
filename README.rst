@@ -153,6 +153,17 @@ in the array or a choice ``value``)
 
 |List prompt| s ---
 
+List with Filter - ``{type: 'listwithfilter'}``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Same as list but filters choices as you type. 
+
+Takes ``type``, ``name``, ``message``, ``choices``\ [, ``default``,
+``filter``] properties. (Note that default must be the choice ``index``
+in the array or a choice ``value``)
+
+|List prompt| s ---
+
 Raw List - ``{type: 'rawlist'}``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
