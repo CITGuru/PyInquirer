@@ -42,7 +42,7 @@ class ChoicesControl(UIControl):
         super().__init__(**kwargs)
 
     def _init_choices(self, default=None):
-        if default is not None and default not in self._choices:
+        if default is not None and self._find_choice(default) is None:
             raise ValueError(f"Default value {default} is not part of the given choices")
         self._compute_available_choices(default=default)
 
@@ -82,8 +82,8 @@ class ChoicesControl(UIControl):
             self._selected_index = -1
         else:
             if default is not None:
-                self._selected_choice = default
-                self._selected_index = self._cached_choices.index(default)
+                self._selected_choice = self._find_choice(default)
+                self._selected_index = self._cached_choices.index(self._selected_choice)
 
             if self._selected_choice not in self._cached_choices:
                 self._selected_choice = self._cached_choices[0]
@@ -95,6 +95,17 @@ class ChoicesControl(UIControl):
                 else:
                     while self._selected_choice.get('disabled', False):
                         self.select_next_choice()
+
+    def _find_choice(self, value):
+        for choice in self._choices:
+            if isinstance(choice, Separator):
+                continue
+            elif isinstance(choice, str):
+                if value == choice:
+                    return choice
+            else:
+                if value == choice.get('value'):
+                    return choice
 
     def _reset_cached_choices(self) -> None:
         self._cached_choices = None
@@ -118,7 +129,7 @@ class ChoicesControl(UIControl):
         else:
             while isinstance(self._selected_choice, dict) and self._selected_choice.get('disabled', False):
                 _next()
-                
+
 
     def select_previous_choice(self) -> None:
         if not self._cached_choices or self._selected_choice is None:

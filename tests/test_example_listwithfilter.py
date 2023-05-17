@@ -30,6 +30,13 @@ def test_list(example_app):
     example_app.write(keys.ENTER)
     example_app.expect(textwrap.dedent("""\
         ? What size do you need?  Jumbo
+        ? How well done do you want it?  (Use arrow keys)
+           Crispy
+         ❯ Normal
+           Soft"""))
+    example_app.write(keys.ENTER)
+    example_app.expect(textwrap.dedent("""\
+        ? How well done do you want it?  Normal
         ? Which vehicle you want to use for delivery?  (Use arrow keys)
          ❯ bike
            car
